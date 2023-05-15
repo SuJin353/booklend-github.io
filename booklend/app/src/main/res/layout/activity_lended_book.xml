@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <RelativeLayout
+        android:id="@+id/item_rl_borrowed_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="41sp"
+            style="@style/app_name"
+            tools:ignore="TextSizeCheck" />
+        <TextView
+            android:id="@+id/tv_borrowed_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Borrowed book"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_below="@id/tv_app_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+        <GridView
+            android:id="@+id/gv_borrowed_book"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:numColumns="4"
+            android:layout_below="@id/tv_borrowed_book"
+            android:layout_marginTop="10dp"/>
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <RelativeLayout
+        android:id="@+id/item_rl_book_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="41sp"
+            style="@style/app_name"
+            tools:ignore="TextSizeCheck" />
+
+        <ImageView
+            android:id="@+id/iv_book_cover"
+            android:layout_width="105dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/tv_app_name"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/book" />
+
+        <TextView
+            android:id="@+id/tv_book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_app_name"
+            android:layout_alignBaseline="@id/iv_book_cover"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/iv_book_cover"
+            android:text="Book name:"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_book_name"
+            android:layout_alignStart="@id/tv_book_name"
+            android:text="Tag:"
+            android:layout_marginTop="5dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_tag"
+            android:layout_alignStart="@id/tv_book_name"
+            android:text="Author:"
+            android:layout_marginTop="5dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_author"
+            android:layout_alignStart="@id/tv_book_name"
+            android:text="Price"
+            android:layout_marginTop="5dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content"
+            android:layout_below="@id/iv_book_cover"
+            android:layout_alignStart="@id/iv_book_cover"
+            android:layout_marginTop="10dp"/>
+        <Button
+            android:id="@+id/bt_lend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_content"
+            android:layout_alignEnd="@id/tv_content_info"
+            android:layout_marginTop="5dp"
+            android:text="Lend"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            android:onClick="onClick"
+            />
+        <TextView
+            android:id="@+id/tv_content_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Obsessed gamer Arisu suddenly finds himself in a strange, emptied-out version of Tokyo in which he and his friends must compete in dangerous games in order to survive."
+            android:layout_below="@id/bt_lend"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_alignStart="@id/tv_content"/>
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:layout_below="@id/tv_content_info"
+            android:layout_alignStart="@id/tv_content"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comment"
+            android:layout_alignStart="@id/tv_content"
+            android:layout_alignEnd="@id/tv_content_info"
+            android:layout_marginTop="10dp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        <ListView
+            android:id="@+id/lv_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_comment"
+            android:layout_marginTop="10dp" />
+    </RelativeLayout>
+</ScrollView>
