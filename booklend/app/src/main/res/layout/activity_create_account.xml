@@ -35,15 +35,15 @@
             style="@style/app_name"
             tools:ignore="TextSizeCheck" />
         <ImageView
-            android:id="@+id/iv_profile_pic"
-            android:layout_width="143dp"
-            android:layout_height="143dp"
-            android:background="@drawable/profile_pic"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tv_app_name"
-            android:layout_marginTop="50dp"
-            android:contentDescription="profile picture"
-            tools:ignore="HardcodedText" />
+        android:id="@+id/iv_profile_pic"
+        android:layout_width="143dp"
+        android:layout_height="143dp"
+        android:background="@drawable/profile_pic"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tv_app_name"
+        android:layout_marginTop="50dp"
+        android:contentDescription="profile picture"
+        tools:ignore="HardcodedText" />
         <EditText
             android:id="@+id/et_username"
             android:layout_width="360dp"

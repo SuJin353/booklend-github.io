@@ -3,11 +3,13 @@ package com.example.booklend;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity {
     GridView gv_trending;
+    ImageButton ibt_search, ibt_profile;
     Integer[] imageIDs = {
             R.drawable.ic_launcher_background,
             R.drawable.ic_launcher_background,
@@ -33,6 +36,16 @@ public class Menu extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.gridView1);
         gridView.setAdapter(new ImageAdapter(this));
         gridView.setNumColumns(imageIDs.length);
+
+
+        ibt_profile = (ImageButton) findViewById(R.id.ibt_profile);
+        ibt_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this,Profile.class);
+                startActivity(intent);
+            }
+        });
     }
     public class ImageAdapter extends BaseAdapter {
         private Context context;

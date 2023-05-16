@@ -66,6 +66,7 @@
                     android:layout_width="900dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <GridView
                         android:id="@+id/gridView1"
                         android:layout_width="fill_parent"
@@ -73,17 +74,23 @@
                         android:layout_margin="4dp"
                         android:columnWidth="100dp"
                         android:gravity="center"
-                        android:numColumns="9"
                         android:horizontalSpacing="1dp"
+                        android:numColumns="9"
                         android:scrollbarAlwaysDrawHorizontalTrack="true"
                         android:scrollbarAlwaysDrawVerticalTrack="true"
                         android:scrollbars="horizontal"
                         android:stretchMode="none"
-                        android:verticalSpacing="1dp">
-                    </GridView>
+                        android:verticalSpacing="1dp"></GridView>
                 </LinearLayout>
             </FrameLayout>
         </HorizontalScrollView>
-
+        <ImageButton
+            android:id="@+id/ibt_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_profile"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </RelativeLayout>
 </ScrollView>
