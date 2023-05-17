@@ -2,6 +2,8 @@ package com.example.booklend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -23,6 +25,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         Mapping();
     }
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View view)
     {
         switch (view.getId())

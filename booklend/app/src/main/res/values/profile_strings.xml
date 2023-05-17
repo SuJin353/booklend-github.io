@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="credit">Credit</string>
+    <string name="borrowed_book">Borrowed book</string>
+    <string name="overdue_book">Overdue book</string>
+    <string name="transaction_history">Transaction history</string>
+    <string name="buy_credit">Buy credit</string>
+</resources>

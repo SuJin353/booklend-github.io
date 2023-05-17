@@ -14,7 +14,7 @@ public class ForgetPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forget_password);
     }
     public void onClick(View view){
-        if (view.getId() == R.id.bt_back){
+        if (view.getId() == R.id.ibt_back){
             Intent intent = new Intent(ForgetPassword.this, Login.class);
             startActivity(intent);
         }

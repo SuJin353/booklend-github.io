@@ -9,12 +9,22 @@
         android:id="@+id/item_rl_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/ibt_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+            android:onClick="onClick"/>
         <TextView
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ibt_back"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:text="@string/app_name"
             android:textAlignment="center"
             android:textAllCaps="true"

@@ -45,7 +45,7 @@ public class CreateAccount extends AppCompatActivity {
                 {
                     et_password.setError("Password can't be empty");
                 }
-                if (confirm_password.isEmpty() || confirm_password != password)
+                if (confirm_password.isEmpty())
                 {
                     et_username.setError("Please input same password");
                 }
