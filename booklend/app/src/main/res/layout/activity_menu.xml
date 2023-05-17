@@ -80,7 +80,7 @@
                         android:scrollbarAlwaysDrawVerticalTrack="true"
                         android:scrollbars="horizontal"
                         android:stretchMode="none"
-                        android:verticalSpacing="1dp"></GridView>
+                        android:verticalSpacing="1dp" />
                 </LinearLayout>
             </FrameLayout>
         </HorizontalScrollView>

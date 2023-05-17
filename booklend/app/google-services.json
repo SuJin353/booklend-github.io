@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "139996442823",
+    "project_id": "booklend-d47eb",
+    "storage_bucket": "booklend-d47eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139996442823:android:b508ea51c213c340ce4ee2",
+        "android_client_info": {
+          "package_name": "com.example.booklend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139996442823-tsdq7ll9jlu7ej3lc2noqmkinkiosfv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIXAreQxJ1hHGmA_W562o2mYL6RxmhByg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139996442823-tsdq7ll9jlu7ej3lc2noqmkinkiosfv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
