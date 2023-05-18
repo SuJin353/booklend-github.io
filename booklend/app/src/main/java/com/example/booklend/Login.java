@@ -59,11 +59,7 @@ public class Login extends AppCompatActivity {
                 }
                 else if (email.isEmpty())
                 {
-                    et_password.setError("Email can't be empty");
-                }
-                else
-                {
-                    et_password.setError("Invalid email");
+                    et_email.setError("Email can't be empty");
                 }
                 break;
             }
