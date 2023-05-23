@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="change_info">Change Info</string>
+    <string name="personal_info">Personal Info</string>
     <string name="credit">Credit</string>
-    <string name="borrowed_book">Borrowed book</string>
-    <string name="overdue_book">Overdue book</string>
-    <string name="transaction_history">Transaction history</string>
-    <string name="buy_credit">Buy credit</string>
+    <string name="borrowed_book">Borrowed Book</string>
+    <string name="overdue_book">Overdue Book</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="buy_credit">Buy Credit</string>
 </resources>

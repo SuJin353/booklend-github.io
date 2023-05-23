@@ -33,33 +33,22 @@
             android:contentDescription="profile picture"
             tools:ignore="HardcodedText" />
         <TextView
-            android:id="@+id/tv_username"
+            android:id="@+id/tv_personal_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_profile_pic"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="@string/User_name"
+            android:text="@string/personal_info"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/tv_credit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_username"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/credit"
-            android:textSize="20sp"
-            android:textColor="@color/black"/>
-
+            android:textColor="@color/black"
+            android:onClick="onClick"/>
         <TextView
             android:id="@+id/tv_borrowed_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_credit"
+            android:layout_below="@id/tv_personal_info"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"

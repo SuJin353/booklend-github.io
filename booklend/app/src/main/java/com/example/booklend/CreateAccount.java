@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,8 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateAccount extends AppCompatActivity {
     private FirebaseAuth auth;
-    private EditText et_username, et_email, et_phone_number, et_password, et_confirm_password;
-    private Button bt_create;
+    private EditText et_username, et_full_name, et_email, et_phone_number, et_password, et_confirm_password;
+    private TextView tv_create;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("users");
     @Override
@@ -32,10 +33,11 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
         Mapping();
 
-        bt_create.setOnClickListener(new View.OnClickListener() {
+        tv_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = et_username.getText().toString().trim();
+                String fullname = et_full_name.getText().toString().trim();
                 String email = et_email.getText().toString().trim();
                 String phone_number = et_phone_number.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
@@ -54,13 +56,14 @@ public class CreateAccount extends AppCompatActivity {
                     databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.hasChild(phone_number)){
+                            if (snapshot.hasChild(username)){
                                 Toast.makeText(CreateAccount.this,"This phone number already been used", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                databaseReference.child(phone_number).child("username").setValue(username);
-                                databaseReference.child(phone_number).child("email").setValue(email);
-                                databaseReference.child(phone_number).child("password").setValue(password);
+                                databaseReference.child(username).child("fullname").setValue(fullname);
+                                databaseReference.child(username).child("email").setValue(email);
+                                databaseReference.child(username).child("password").setValue(password);
+                                databaseReference.child(username).child("phone_number").setValue(phone_number);
                                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -90,10 +93,11 @@ public class CreateAccount extends AppCompatActivity {
     {
         auth = FirebaseAuth.getInstance();
         et_username = (EditText) findViewById(R.id.et_username);
+        et_full_name = (EditText) findViewById(R.id.et_fullname);
         et_email = (EditText) findViewById(R.id.et_email);
         et_phone_number = (EditText) findViewById(R.id.et_phone_number);
         et_password = (EditText) findViewById(R.id.et_password);
         et_confirm_password = (EditText) findViewById(R.id.et_confirm_password);
-        bt_create = (Button) findViewById(R.id.bt_create);
+        tv_create = (TextView) findViewById(R.id.tv_create);
     }
 }

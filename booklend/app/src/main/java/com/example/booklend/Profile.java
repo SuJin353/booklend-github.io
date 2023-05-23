@@ -17,6 +17,11 @@ public class Profile extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_personal_info: {
+                Intent intent = new Intent(Profile.this, PersonalInfo.class);
+                startActivity(intent);
+                break;
+            }
             case R.id.tv_borrowed_book: {
                 Intent intent = new Intent(Profile.this, BorrowedBook.class);
                 startActivity(intent);

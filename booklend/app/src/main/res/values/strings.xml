@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Book lend</string>
     <string name="User_name">User name</string>
+    <string name="Full_name">Full name</string>
     <string name="Password">Password</string>
     <string name="Sign_in">Sign in</string>
     <string name="Forget_password">Forget your password?</string>
