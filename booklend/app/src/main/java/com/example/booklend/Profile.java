@@ -18,7 +18,7 @@ public class Profile extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_personal_info: {
-                Intent intent = new Intent(Profile.this, PersonalInfo.class);
+                Intent intent = new Intent(Profile.this, UserInfo.class);
                 startActivity(intent);
                 break;
             }
