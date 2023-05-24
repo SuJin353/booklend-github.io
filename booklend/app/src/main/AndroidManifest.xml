@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Booklend"
         tools:targetApi="31">
         <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
+            android:name=".nav_header"
+            android:exported="false" />
+        <activity
             android:name=".UserInfo"
             android:exported="false" />
         <activity
@@ -27,7 +33,7 @@
             android:name=".BuyCredit"
             android:exported="false" />
         <activity
-            android:name=".Profile"
+            android:name=".User"
             android:exported="false" />
         <activity
             android:name=".BorrowedBook"
@@ -39,7 +45,7 @@
             android:name=".ForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".Menu"
+            android:name=".Home"
             android:exported="false" />
         <activity
             android:name=".CreateAccount"

@@ -18,7 +18,7 @@ public class OverdueBook extends AppCompatActivity {
         ibt_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(OverdueBook.this, Profile.class);
+                Intent intent =  new Intent(OverdueBook.this, User.class);
                 startActivity(intent);
                 finish();
             }

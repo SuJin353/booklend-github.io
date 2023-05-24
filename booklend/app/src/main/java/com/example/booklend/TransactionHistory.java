@@ -20,7 +20,7 @@ public class TransactionHistory extends AppCompatActivity {
         ibt_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(TransactionHistory.this, Profile.class);
+                Intent intent =  new Intent(TransactionHistory.this, User.class);
                 startActivity(intent);
                 finish();
             }
