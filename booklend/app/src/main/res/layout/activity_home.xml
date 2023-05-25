@@ -24,6 +24,17 @@
             android:textSize="41sp"
             style="@style/app_name"
             tools:ignore="TextSizeCheck" />
+        <TextView
+            android:id="@+id/tv_catagory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_app_name" :/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_book_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_app_name"
+            android:scrollbars="horizontal"/>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigationView"
             android:layout_width="match_parent"

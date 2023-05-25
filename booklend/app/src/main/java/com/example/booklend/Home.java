@@ -2,20 +2,30 @@ package com.example.booklend;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class Home extends AppCompatActivity {
+    RecyclerView rv_book_item;
+    ArrayList<String> data;
+    LinearLayoutManager linearLayoutManager;
+    BookItemAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Mapping();
         BottomNavigation();
     }
     @SuppressLint("NonConstantResourceId")
@@ -75,5 +85,22 @@ public class Home extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    void Mapping()
+    {
+        rv_book_item = findViewById(R.id.rv_book_item);
+        data = new ArrayList<>();
+        data.add("HELLO");
+        data.add("HELL");
+        data.add("HEL");
+        data.add("HE");
+        data.add("H");
+        data.add("HE");
+        data.add("HEL");
+
+        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
+        adapter = new BookItemAdapter(data);
+        rv_book_item.setLayoutManager(linearLayoutManager);
+        rv_book_item.setAdapter(adapter);
     }
 }
