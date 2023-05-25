@@ -27,6 +27,11 @@ public class Home extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.bottom_home:
                     return true;
+                case R.id.bottom_serach:
+                    startActivity(new Intent(getApplicationContext(), Search.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
                 case R.id.bottom_user:
                     startActivity(new Intent(getApplicationContext(), User.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -15,16 +15,13 @@
         android:theme="@style/Theme.Booklend"
         tools:targetApi="31">
         <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
             android:name=".Notification"
             android:exported="false" />
         <activity
-            android:name=".nav_header"
-            android:exported="false" />
-        <activity
             android:name=".UserInfo"
-            android:exported="false" />
-        <activity
-            android:name=".PersonalInfo"
             android:exported="false" />
         <activity
             android:name=".OverdueBook"

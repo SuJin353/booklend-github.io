@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
     <RelativeLayout
-        android:id="@+id/item_rl_overdue_book"
+        android:id="@+id/item_rl_buy_credit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton

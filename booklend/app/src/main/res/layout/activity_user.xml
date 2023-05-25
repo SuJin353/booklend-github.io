@@ -8,7 +8,7 @@
     android:fillViewport="true"
     tools:context=".User">
     <RelativeLayout
-        android:id="@+id/item_rl_menu"
+        android:id="@+id/item_rl_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
