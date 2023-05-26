@@ -1,5 +1,6 @@
 package com.example.booklend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,20 +14,52 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
     RecyclerView rv_book_item;
-    ArrayList<String> data;
-    LinearLayoutManager linearLayoutManager;
+    ArrayList<Book> bookArrayList;
     BookItemAdapter adapter;
+    LinearLayoutManager linearLayoutManager;
+    FirebaseDatabase database;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        rv_book_item = findViewById(R.id.rv_book_item);
+        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
+        rv_book_item.setLayoutManager(linearLayoutManager);
+        bookArrayList = new ArrayList<>();
+        adapter = new BookItemAdapter(bookArrayList,this);
+        rv_book_item.setAdapter(adapter);
         Mapping();
         BottomNavigation();
+        DisplayBook();
+    }
+    void DisplayBook()
+    {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Book book = dataSnapshot.getValue(Book.class);
+                    bookArrayList.add(book);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @SuppressLint("NonConstantResourceId")
     void BottomNavigation()
@@ -81,26 +114,11 @@ public class Home extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
-
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
     void Mapping()
     {
-        rv_book_item = findViewById(R.id.rv_book_item);
-        data = new ArrayList<>();
-        data.add("HELLO");
-        data.add("HELL");
-        data.add("HEL");
-        data.add("HE");
-        data.add("H");
-        data.add("HE");
-        data.add("HEL");
 
-        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
-        adapter = new BookItemAdapter(data);
-        rv_book_item.setLayoutManager(linearLayoutManager);
-        rv_book_item.setAdapter(adapter);
     }
 }

@@ -103,10 +103,9 @@
             android:hint="@string/Password"
             android:inputType="textPassword"
             android:autofillHints="Alex1234!" />
-
         <TextView
             android:id="@+id/tv_create"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_confirm_password"
             android:layout_centerHorizontal="true"

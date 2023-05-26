@@ -1,6 +1,6 @@
 package com.example.booklend;
 
-import android.provider.ContactsContract;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.MyHolder> {
-    ArrayList<String> data;
-    public BookItemAdapter(ArrayList<String> data)
+    private ArrayList<Book> book;
+    private Context context;
+    public BookItemAdapter(ArrayList<Book> book, Context context)
     {
-        this.data = data;
+        this.book = book;
+        this.context = context;
     }
 
     @NonNull
@@ -27,20 +31,22 @@ public class BookItemAdapter extends RecyclerView.Adapter<BookItemAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.tv_book_item_name.setText(data.get(position));
+        Glide.with(context).load(book.get(position).getImageUri()).into(holder.iv_book_item);
+        holder.tv_book_item_name.setText(book.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return book.size();
     }
 
-    class MyHolder extends RecyclerView.ViewHolder{
+    public static class MyHolder extends RecyclerView.ViewHolder{
         TextView tv_book_item_name;
-
+        ImageView iv_book_item;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             tv_book_item_name = itemView.findViewById(R.id.tv_book_item_name);
+            iv_book_item = itemView.findViewById(R.id.iv_book_item);
         }
     }
 }
