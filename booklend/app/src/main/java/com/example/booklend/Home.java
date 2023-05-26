@@ -10,7 +10,6 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,23 +21,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Home extends AppCompatActivity {
-    RecyclerView rv_book_item;
+public class Home extends AppCompatActivity implements RecycleViewInterface{
+    RecyclerView rv_fantasy_book;
     ArrayList<Book> bookArrayList;
     BookItemAdapter adapter;
     LinearLayoutManager linearLayoutManager;
-    FirebaseDatabase database;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        rv_book_item = findViewById(R.id.rv_book_item);
-        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
-        rv_book_item.setLayoutManager(linearLayoutManager);
-        bookArrayList = new ArrayList<>();
-        adapter = new BookItemAdapter(bookArrayList,this);
-        rv_book_item.setAdapter(adapter);
         Mapping();
         BottomNavigation();
         DisplayBook();
@@ -119,6 +111,22 @@ public class Home extends AppCompatActivity {
     }
     void Mapping()
     {
+        rv_fantasy_book = findViewById(R.id.rv_fantasy_book);
+        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
+        rv_fantasy_book.setLayoutManager(linearLayoutManager);
+        bookArrayList = new ArrayList<>();
+        adapter = new BookItemAdapter(bookArrayList,this, this);
+        rv_fantasy_book.setAdapter(adapter);
+    }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(Home.this, BookInfo.class);
+        intent.putExtra("IMAGE",bookArrayList.get(position).getImageUri());
+        intent.putExtra("NAME", bookArrayList.get(position).getName());
+        intent.putExtra("GENRE", bookArrayList.get(position).getGenre());
+        intent.putExtra("AUTHOR", bookArrayList.get(position).getAuthor());
+        intent.putExtra("PRICE", bookArrayList.get(position).getPrice());
+        startActivity(intent);
     }
 }

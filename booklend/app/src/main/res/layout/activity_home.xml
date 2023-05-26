@@ -25,17 +25,30 @@
             style="@style/app_name"
             tools:ignore="TextSizeCheck" />
         <TextView
-            android:id="@+id/tv_trending"
+            android:id="@+id/tv_fantasy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_app_name"
-            android:text="@string/trending"
+            android:text="@string/fantasy"
             android:layout_marginStart="10dp"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_book_item"
+            android:id="@+id/rv_fantasy_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_trending"
+            android:layout_below="@id/tv_fantasy"
+            android:scrollbars="horizontal"/>
+        <TextView
+            android:id="@+id/tv_sci_fi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_fantasy_book"
+            android:text="@string/sci_fi"
+            android:layout_marginStart="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tv_sci_fi_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_sci_fi"
             android:scrollbars="horizontal"/>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigationView"
@@ -52,6 +65,7 @@
             app:itemIconSize="30dp"
             app:itemIconTint="@drawable/item_selector"
             app:itemRippleColor="@android:color/transparent"
-            app:labelVisibilityMode="unlabeled"/>
+            app:labelVisibilityMode="unlabeled"
+            tools:ignore="VisualLintBottomNav" />
     </RelativeLayout>
 </ScrollView>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search">Search</string>
-    <string name="trending">Trending!</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="sci_fi">Science Fiction</string>
+    <string name="mystery">Mystery</string>
+    <string name="romance">Romance</string>
+    <string name="comic">Comic</string>
+    <string name="fairytale">Fairy Tales</string>
+    <string name="historical">Historical</string>
+    <string name="adventure">Adventure</string>
+    <string name="comedy">Comedy</string>
 </resources>
