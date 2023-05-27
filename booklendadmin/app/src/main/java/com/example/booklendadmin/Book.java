@@ -1,18 +1,20 @@
 package com.example.booklendadmin;
 
 public class Book {
-    private String imageUri, name, genre, author;
-    private int price;
+    private String imageUri, name, genre, author, description;
+    private int price, quantity;
 
     public Book() {
 
     }
-    public Book(String imageUri, String name, String genre, String author, int price) {
+    public Book(String imageUri, String name, String genre, String author, int price, int quantity, String description) {
         this.imageUri = imageUri;
         this.name = name;
         this.genre = genre;
         this.author = author;
         this.price = price;
+        this.quantity = quantity;
+        this.description = description;
     }
 
     public String getImageUri() {
@@ -54,4 +56,20 @@ public class Book {
     public void setPrice(int price) {
         this.price = price;
     }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }

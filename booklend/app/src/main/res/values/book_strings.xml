@@ -4,7 +4,7 @@
     <string name="genre">Genre:</string>
     <string name="author">Author:</string>
     <string name="price">Price:</string>
-    <string name="content">Content</string>
+    <string name="quantity">Quantity</string>
     <string name="description">Description</string>
     <string name="lend">LEND</string>
     <string name="comment">Comment</string>

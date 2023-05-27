@@ -113,6 +113,23 @@
             android:text=""
             android:textSize="17sp"/>
         <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_price_info"
+            android:layout_alignStart="@id/tv_name"
+            android:text="@string/quantity"
+            android:layout_marginTop="5dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/tv_quantity_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_quantity"
+            android:layout_alignStart="@id/tv_name_info"
+            android:text=""
+            android:textSize="17sp"/>
+        <TextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

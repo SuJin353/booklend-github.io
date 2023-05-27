@@ -22,10 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity implements RecycleViewInterface{
-    RecyclerView rv_fantasy_book;
-    ArrayList<Book> bookArrayList;
-    BookItemAdapter adapter;
-    LinearLayoutManager linearLayoutManager;
+    int i;
+    RecyclerView rv_fantasy_book, rv_sci_fi_book;
+    ArrayList<ArrayList<Book>> bookArrayList = new ArrayList<>();
+    ArrayList<Book> genre;
+    BookItemAdapter fantasy_adapter, sci_fi_adapter;
+    String[] genres = {"fantasy","sci_fi"};
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +39,36 @@ public class Home extends AppCompatActivity implements RecycleViewInterface{
     }
     void DisplayBook()
     {
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Book book = dataSnapshot.getValue(Book.class);
-                    bookArrayList.add(book);
+        for (i = 0; i < genres.length; i++)
+        {
+            int j = i;
+            databaseReference.child(genres[i]).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    genre.clear();
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        Book book = dataSnapshot.getValue(Book.class);
+                        genre.add(book);
+                    }
+                    bookArrayList.add(genre);
+                    switch (genres[j]){
+                        case "fantasy": {
+                            rv_fantasy_book.setAdapter(fantasy_adapter);
+                            break;
+                        }
+                        case "sci_fi":{
+                            rv_sci_fi_book.setAdapter(sci_fi_adapter);
+                            break;
+                        }
+                    }
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
     }
     @SuppressLint("NonConstantResourceId")
     void BottomNavigation()
@@ -89,44 +106,37 @@ public class Home extends AppCompatActivity implements RecycleViewInterface{
         builder.setMessage("Are you sure you want to logout ?");
         builder.setCancelable(true);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),Login.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                dialogInterface.dismiss();
-                finish();
-            }
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(),Login.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            dialogInterface.dismiss();
+            finish();
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
     void Mapping()
     {
         rv_fantasy_book = findViewById(R.id.rv_fantasy_book);
-        linearLayoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
-        rv_fantasy_book.setLayoutManager(linearLayoutManager);
-        bookArrayList = new ArrayList<>();
-        adapter = new BookItemAdapter(bookArrayList,this, this);
-        rv_fantasy_book.setAdapter(adapter);
+        rv_sci_fi_book = findViewById(R.id.rv_sci_fi_book);
+        rv_fantasy_book.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        rv_sci_fi_book.setLayoutManager(new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false));
+        genre = new ArrayList<>();
+        fantasy_adapter =  new BookItemAdapter(genre, this, this);
+        sci_fi_adapter =  new BookItemAdapter(genre, this, this);
     }
-
     @Override
     public void onItemClick(int position) {
+        if (bookArrayList.get(0).get(position).getGenre() == "fantasy");
         Intent intent = new Intent(Home.this, BookInfo.class);
-        intent.putExtra("IMAGE",bookArrayList.get(position).getImageUri());
-        intent.putExtra("NAME", bookArrayList.get(position).getName());
-        intent.putExtra("GENRE", bookArrayList.get(position).getGenre());
-        intent.putExtra("AUTHOR", bookArrayList.get(position).getAuthor());
-        intent.putExtra("PRICE", bookArrayList.get(position).getPrice());
+        intent.putExtra("IMAGE",bookArrayList.get(position).get(position).getImageUri());
+        intent.putExtra("NAME", bookArrayList.get(position).get(position).getName());
+        intent.putExtra("GENRE", bookArrayList.get(position).get(position).getGenre());
+        intent.putExtra("AUTHOR", bookArrayList.get(position).get(position).getAuthor());
+        intent.putExtra("PRICE", bookArrayList.get(position).get(position).getPrice());
         startActivity(intent);
     }
 }

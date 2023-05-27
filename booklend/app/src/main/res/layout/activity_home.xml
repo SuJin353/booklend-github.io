@@ -45,7 +45,7 @@
             android:text="@string/sci_fi"
             android:layout_marginStart="10dp"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tv_sci_fi_book"
+            android:id="@+id/rv_sci_fi_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_sci_fi"

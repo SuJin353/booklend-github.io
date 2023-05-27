@@ -31,7 +31,7 @@ import com.google.firebase.storage.UploadTask;
 public class AddBook extends AppCompatActivity {
     private Button bt_add_book;
     private ImageView iv_book_cover;
-    private EditText et_book_name, et_book_genre, et_book_author, et_book_price;
+    private EditText et_book_name, et_book_genre, et_book_author, et_book_price, et_book_quantity, et_book_description;
     private Uri imageUri;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
@@ -79,6 +79,8 @@ public class AddBook extends AppCompatActivity {
                     String genre = et_book_genre.getText().toString();
                     String author = et_book_author.getText().toString();
                     int price = Integer.parseInt(et_book_price.getText().toString());
+                    int quantity = Integer.parseInt(et_book_quantity.getText().toString());
+                    String description = et_book_description.getText().toString();
                     final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
                     imageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -87,9 +89,9 @@ public class AddBook extends AppCompatActivity {
                             imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Book book = new Book(uri.toString(), name, genre, author, price);
+                                    Book book = new Book(uri.toString(), name, genre, author, price, quantity, description);
                                     String key = databaseReference.push().getKey();
-                                    databaseReference.child(key).setValue(book);
+                                    databaseReference.child(genre).child(key).setValue(book);
                                     Toast.makeText(AddBook.this, "Upload", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -122,6 +124,8 @@ public class AddBook extends AppCompatActivity {
         et_book_genre = findViewById(R.id.et_book_genre);
         et_book_author = findViewById(R.id.et_book_author);
         et_book_price = findViewById(R.id.et_book_price);
+        et_book_quantity = findViewById(R.id.et_book_quantity);
+        et_book_description = findViewById(R.id.et_book_description);
         databaseReference = FirebaseDatabase.getInstance().getReference("Books");
         storageReference = FirebaseStorage.getInstance().getReference();
     }
