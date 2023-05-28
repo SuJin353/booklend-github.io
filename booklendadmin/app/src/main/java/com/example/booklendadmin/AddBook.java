@@ -89,9 +89,10 @@ public class AddBook extends AppCompatActivity {
                             imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Book book = new Book(uri.toString(), name, genre, author, price, quantity, description);
                                     String key = databaseReference.push().getKey();
+                                    Book book = new Book(key, uri.toString(), name, genre, author, price, quantity, description);
                                     databaseReference.child(genre).child(key).setValue(book);
+                                    et_book_description.setText("");
                                     Toast.makeText(AddBook.this, "Upload", Toast.LENGTH_SHORT).show();
                                 }
                             });

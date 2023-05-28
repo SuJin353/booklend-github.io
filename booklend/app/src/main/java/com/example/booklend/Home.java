@@ -22,13 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity implements RecycleViewInterface{
-    int i;
-    RecyclerView rv_fantasy_book, rv_sci_fi_book;
-    ArrayList<ArrayList<Book>> bookArrayList = new ArrayList<>();
-    ArrayList<Book> genre;
-    BookItemAdapter fantasy_adapter, sci_fi_adapter;
-    String[] genres = {"fantasy","sci_fi"};
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
+    private int i;
+    private RecyclerView rv_fantasy_book, rv_sci_fi_book;
+    private final ArrayList<ArrayList<Book>> bookArrayList = new ArrayList<>();
+    private ArrayList<Book> genre;
+    private BookItemAdapter fantasy_adapter, sci_fi_adapter;
+    private final String[] genres = {"fantasy","sci_fi"};
+    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,13 +130,15 @@ public class Home extends AppCompatActivity implements RecycleViewInterface{
     }
     @Override
     public void onItemClick(int position) {
-        if (bookArrayList.get(0).get(position).getGenre() == "fantasy");
         Intent intent = new Intent(Home.this, BookInfo.class);
+        intent.putExtra("KEY",bookArrayList.get(position).get(position).getKey());
         intent.putExtra("IMAGE",bookArrayList.get(position).get(position).getImageUri());
         intent.putExtra("NAME", bookArrayList.get(position).get(position).getName());
         intent.putExtra("GENRE", bookArrayList.get(position).get(position).getGenre());
         intent.putExtra("AUTHOR", bookArrayList.get(position).get(position).getAuthor());
         intent.putExtra("PRICE", bookArrayList.get(position).get(position).getPrice());
+        intent.putExtra("QUANTITY", bookArrayList.get(position).get(position).getQuantity());
+        intent.putExtra("DESCRIPTION", bookArrayList.get(position).get(position).getDescription());
         startActivity(intent);
     }
 }

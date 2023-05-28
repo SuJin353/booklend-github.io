@@ -1,13 +1,14 @@
 package com.example.booklendadmin;
 
 public class Book {
-    private String imageUri, name, genre, author, description;
+    private String key, imageUri, name, genre, author, description;
     private int price, quantity;
 
     public Book() {
 
     }
-    public Book(String imageUri, String name, String genre, String author, int price, int quantity, String description) {
+    public Book(String key, String imageUri, String name, String genre, String author, int price, int quantity, String description) {
+        this.key = key;
         this.imageUri = imageUri;
         this.name = name;
         this.genre = genre;
@@ -16,7 +17,13 @@ public class Book {
         this.quantity = quantity;
         this.description = description;
     }
+    public String getKey() {
+        return key;
+    }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
     public String getImageUri() {
         return imageUri;
     }

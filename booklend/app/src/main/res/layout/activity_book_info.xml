@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
     <RelativeLayout
-        android:id="@+id/item_rl_book_detail"
+        android:id="@+id/rl_book_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton
@@ -40,7 +40,6 @@
             android:layout_below="@+id/tv_app_name"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"/>
-
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
@@ -57,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_name"
-            android:layout_toEndOf="@id/tv_author"
+            android:layout_toEndOf="@id/tv_quantity"
+            android:layout_marginStart="5dp"
             android:text=""
             android:textSize="17sp"
             android:textAlignment="center"/>
