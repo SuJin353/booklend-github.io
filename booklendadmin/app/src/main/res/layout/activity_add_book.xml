@@ -55,21 +55,22 @@
             android:id="@+id/tv_book_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/et_book_genre"
+            android:layout_marginTop="5dp"
+            android:layout_alignTop="@id/sp_book_genre"
             android:layout_marginStart="10dp"
             android:text="@string/genre"
             android:textSize="20sp"/>
-        <EditText
-            android:id="@+id/et_book_genre"
+
+        <Spinner
+            android:id="@+id/sp_book_genre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_book_name"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/tv_book_quantity"
-            android:textSize="20sp"
-            android:autofillHints=""
-            android:inputType="text"
-            tools:ignore="LabelFor,VisualLintTextFieldSize,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_alignStart="@id/et_book_name"
+            android:layout_marginTop="12dp"
+            android:dropDownVerticalOffset="480dp"
+            android:spinnerMode="dropdown"
+            tools:ignore="SpeakableTextPresentCheck" />
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="wrap_content"
@@ -82,8 +83,8 @@
             android:id="@+id/et_book_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_book_genre"
-            android:layout_marginTop="5dp"
+            android:layout_below="@id/sp_book_genre"
+            android:layout_marginTop="11dp"
             android:layout_toEndOf="@id/tv_book_quantity"
             android:textSize="20sp"
             android:autofillHints=""

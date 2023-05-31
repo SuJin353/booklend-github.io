@@ -15,9 +15,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,7 +33,8 @@ import com.google.firebase.storage.UploadTask;
 public class AddBook extends AppCompatActivity {
     private Button bt_add_book;
     private ImageView iv_book_cover;
-    private EditText et_book_name, et_book_genre, et_book_author, et_book_price, et_book_quantity, et_book_description;
+    private EditText et_book_name, et_book_author, et_book_price, et_book_quantity, et_book_description;
+    private Spinner sp_book_genre;
     private Uri imageUri;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
@@ -76,7 +79,7 @@ public class AddBook extends AppCompatActivity {
                 if (imageUri != null)
                 {
                     String name = et_book_name.getText().toString();
-                    String genre = et_book_genre.getText().toString();
+                    String genre = sp_book_genre.getSelectedItem().toString();
                     String author = et_book_author.getText().toString();
                     int price = Integer.parseInt(et_book_price.getText().toString());
                     int quantity = Integer.parseInt(et_book_quantity.getText().toString());
@@ -122,11 +125,16 @@ public class AddBook extends AppCompatActivity {
         iv_book_cover = findViewById(R.id.iv_book_cover);
         bt_add_book = findViewById(R.id.bt_add_book);
         et_book_name = findViewById(R.id.et_book_name);
-        et_book_genre = findViewById(R.id.et_book_genre);
+        sp_book_genre = findViewById(R.id.sp_book_genre);
         et_book_author = findViewById(R.id.et_book_author);
         et_book_price = findViewById(R.id.et_book_price);
         et_book_quantity = findViewById(R.id.et_book_quantity);
         et_book_description = findViewById(R.id.et_book_description);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Genres, R.layout.custom_spinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_book_genre.setAdapter(adapter);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Books");
         storageReference = FirebaseStorage.getInstance().getReference();
     }
