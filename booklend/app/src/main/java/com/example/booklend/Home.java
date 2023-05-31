@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Home extends AppCompatActivity{
+public class Home extends AppCompatActivity implements OnParentClickListener{
     RecyclerView recyclerView;
     ArrayList<ParentModelClass> parentModelClassArrayList;
     ArrayList<ChildModelClass> childModelClassArrayList;
@@ -120,5 +120,19 @@ public class Home extends AppCompatActivity{
         builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onChildItemClick(int parentPosition, int childPosition) {
+        Intent intent = new Intent(Home.this, BookInfo.class);
+        intent.putExtra("KEY",parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getKey());
+        intent.putExtra("IMAGE",parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getImageUri());
+        intent.putExtra("NAME", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getName());
+        intent.putExtra("GENRE", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getGenre());
+        intent.putExtra("AUTHOR", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getAuthor());
+        intent.putExtra("PRICE", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getPrice());
+        intent.putExtra("QUANTITY", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getQuantity());
+        intent.putExtra("DESCRIPTION", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getDescription());
+        startActivity(intent);
     }
 }

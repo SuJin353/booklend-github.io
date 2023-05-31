@@ -4,14 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -19,7 +16,10 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
 
     List<ParentModelClass> parentModelClassesList;
     Context context;
-
+    OnParentClickListener onParentClickListener;
+    public void setOnParentClickListener(OnParentClickListener onParentClickListener){
+        this.onParentClickListener = onParentClickListener;
+    }
     public ParentAdapter(List<ParentModelClass> parentModelClassesList, Context context) {
         this.parentModelClassesList = parentModelClassesList;
         this.context = context;
@@ -40,6 +40,17 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         holder.rv_child.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
+        childAdapter.setOnChildrenClickListener(new OnChildrenClickListener() {
+            @Override
+            public void OnItemClick(int childPosition) {
+                int parentPosition = getAdapterPosition();
+                onParentClickListener.onChildItemClick(parentPosition,childPosition);
+            }
+        });
+    }
+
+    private int getAdapterPosition() {
+        return getAdapterPosition();
     }
 
     @Override

@@ -14,7 +14,10 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
 
     List<ChildModelClass> childModelClassesList;
     Context context;
-
+    OnChildrenClickListener onChildrenClickListener;
+    public void setOnChildrenClickListener(OnChildrenClickListener onItemClickListener) {
+        this.onChildrenClickListener = onItemClickListener;
+    }
     public ChildAdapter(List<ChildModelClass> childModelClassesList, Context context) {
         this.childModelClassesList = childModelClassesList;
         this.context = context;
@@ -24,7 +27,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
     @Override
     public ChildAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.rv_children,null,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,onChildrenClickListener);
     }
 
     @Override
@@ -39,9 +42,20 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView iv_child_image;
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnChildrenClickListener onChildrenClickListener) {
             super(itemView);
             iv_child_image = itemView.findViewById(R.id.iv_child_item);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onChildrenClickListener != null){
+                        int childPosition = getAdapterPosition();
+                        if (childPosition != RecyclerView.NO_POSITION){
+                            onChildrenClickListener.OnItemClick(childPosition);
+                        }
+                    }
+                }
+            });
         }
     }
 }
