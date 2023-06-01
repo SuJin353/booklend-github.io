@@ -1,13 +1,30 @@
 package com.example.booklend;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParentModelClass {
     String title;
-    List<ChildModelClass> childModelClassesList;
+    ArrayList<ChildModelClass> childModelClassesList;
 
-    public ParentModelClass(String title, List<ChildModelClass> childModelClassesList) {
+    public ParentModelClass(String title, ArrayList<ChildModelClass> childModelClassesList) {
         this.title = title;
+        this.childModelClassesList = childModelClassesList;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<ChildModelClass> getChildModelClassesList() {
+        return childModelClassesList;
+    }
+
+    public void setChildModelClassesList(ArrayList<ChildModelClass> childModelClassesList) {
         this.childModelClassesList = childModelClassesList;
     }
 }

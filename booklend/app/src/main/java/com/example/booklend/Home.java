@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,15 +20,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity implements OnParentClickListener{
     RecyclerView recyclerView;
     ArrayList<ParentModelClass> parentModelClassArrayList;
-    ArrayList<ChildModelClass> childModelClassArrayList;
-    ArrayList<ChildModelClass> fantasy_BookList;
-    ArrayList<ChildModelClass> sci_fi_BookList;
+    ArrayList<ChildModelClass> fantasyArrayList;
+    ArrayList<ChildModelClass> sci_fiArrayList;
+    ArrayList<ChildModelClass> mysteryArrayList;
+    ArrayList<ChildModelClass> romanceArrayList;
+
+    String[] genres = {"Fantasy", "Science Fiction", "Mystery", "Romance"};
     ParentAdapter parentAdapter;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
@@ -36,22 +43,53 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         setContentView(R.layout.activity_home);
         Mapping();
         BottomNavigation();
-        DisplayBook(fantasy_BookList,"Fantasy");
-        DisplayBook(sci_fi_BookList,"Science Fiction");
+        readData(new CallBack() {
+            @Override
+            public void onCallback(ArrayList<ChildModelClass> childArrayList, String genre) {
+                switch (genre){
+                    case "Fantasy":
+                    {
+                        fantasyArrayList = childArrayList;
+                        parentModelClassArrayList.add(new ParentModelClass(genre, fantasyArrayList));
+                        break;
+                    }
+                    case "Science Fiction":
+                    {
+                        sci_fiArrayList = childArrayList;
+                        parentModelClassArrayList.add(new ParentModelClass(genre, sci_fiArrayList));
+                        break;
+                    }
+                    case "Mystery":
+                    {
+                        mysteryArrayList = childArrayList;
+                        parentModelClassArrayList.add(new ParentModelClass(genre, mysteryArrayList));
+                        break;
+                    }
+                    case "Romance":
+                    {
+                        romanceArrayList = childArrayList;
+                        parentModelClassArrayList.add(new ParentModelClass(genre, romanceArrayList));
+                        break;
+                    }
+                }
+                onChildItemClick(1,0);
+                parentAdapter.notifyDataSetChanged();
+            }
+        });
     }
-    void DisplayBook( ArrayList<ChildModelClass> childModelClasses, String genre)
-    {
-        ValueEventListener valueEventListener = new ValueEventListener() {
+    public void readData(CallBack myCallback) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                childModelClasses.clear();
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Book book = dataSnapshot.getValue(Book.class);
-                        childModelClasses.add(new ChildModelClass(book));
+                for (int i = 0; i < genres.length; i++) {
+                    if (snapshot.hasChild(genres[i])) {
+                        ArrayList<ChildModelClass>  childModelClassArrayList = new ArrayList<>();
+                        for (DataSnapshot dataSnapshot : snapshot.child(genres[i]).getChildren()) {
+                            Book book = dataSnapshot.getValue(Book.class);
+                            childModelClassArrayList.add(new ChildModelClass(book));
+                        }
+                        myCallback.onCallback(childModelClassArrayList, genres[i]);
                     }
-                    parentModelClassArrayList.add(new ParentModelClass(genre, childModelClasses));
-                    parentAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -59,17 +97,16 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        databaseReference.child(genre).addListenerForSingleValueEvent(valueEventListener);
+        });
     }
-
     void Mapping()
     {
         recyclerView = findViewById(R.id.rv_parent);
-        childModelClassArrayList = new ArrayList<>();
-        fantasy_BookList = new ArrayList<>();
-        sci_fi_BookList = new ArrayList<>();
         parentModelClassArrayList = new ArrayList<>();
+        fantasyArrayList = new ArrayList<>();
+        sci_fiArrayList = new ArrayList<>();
+        mysteryArrayList = new ArrayList<>();
+        romanceArrayList = new ArrayList<>();
         parentAdapter = new ParentAdapter(parentModelClassArrayList,Home.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(parentAdapter);
@@ -121,18 +158,17 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
     @Override
     public void onChildItemClick(int parentPosition, int childPosition) {
         Intent intent = new Intent(Home.this, BookInfo.class);
-        intent.putExtra("KEY",parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getKey());
-        intent.putExtra("IMAGE",parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getImageUri());
-        intent.putExtra("NAME", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getName());
-        intent.putExtra("GENRE", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getGenre());
-        intent.putExtra("AUTHOR", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getAuthor());
-        intent.putExtra("PRICE", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getPrice());
-        intent.putExtra("QUANTITY", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getQuantity());
-        intent.putExtra("DESCRIPTION", parentModelClassArrayList.get(parentPosition).childModelClassesList.get(childPosition).book.getDescription());
+        intent.putExtra("KEY", parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getKey());
+        intent.putExtra("IMAGE", parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getImageUri());
+        intent.putExtra("NAME",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getName());
+        intent.putExtra("GENRE",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getGenre());
+        intent.putExtra("AUTHOR",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getAuthor());
+        intent.putExtra("PRICE",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getPrice());
+        intent.putExtra("QUANTITY", parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getQuantity());
+        intent.putExtra("DESCRIPTION",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getDescription());
         startActivity(intent);
     }
 }
