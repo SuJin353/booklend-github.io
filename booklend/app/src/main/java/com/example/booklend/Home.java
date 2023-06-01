@@ -159,6 +159,7 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         intent.putExtra("PRICE",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getPrice());
         intent.putExtra("QUANTITY", parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getQuantity());
         intent.putExtra("DESCRIPTION",  parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getDescription());
+        intent.putExtra("BORROWED", parentModelClassArrayList.get(parentPosition).getChildModelClassesList().get(childPosition).getBook().getBorrowed());
         startActivity(intent);
     }
 }

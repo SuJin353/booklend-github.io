@@ -1,19 +1,11 @@
 package com.example.booklendadmin;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,13 +14,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class AddBook extends AppCompatActivity {
     private Button bt_add_book;
@@ -50,67 +43,45 @@ public class AddBook extends AppCompatActivity {
     void Add(){
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK){
-                            Intent data = result.getData();
-                            imageUri = data.getData();
-                            iv_book_cover.setImageURI(imageUri);
-                        }
-                        else {
-                            Toast.makeText(AddBook.this, "No image selected", Toast.LENGTH_SHORT).show();
-                        }
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                        imageUri = data.getData();
+                        iv_book_cover.setImageURI(imageUri);
+                    }
+                    else {
+                        Toast.makeText(AddBook.this, "No image selected", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
-        iv_book_cover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent photoPicker = new Intent();
-                photoPicker.setAction(Intent.ACTION_GET_CONTENT);
-                photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
-            }
+        iv_book_cover.setOnClickListener(view -> {
+            Intent photoPicker = new Intent();
+            photoPicker.setAction(Intent.ACTION_GET_CONTENT);
+            photoPicker.setType("image/*");
+            activityResultLauncher.launch(photoPicker);
         });
-        bt_add_book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (imageUri != null)
-                {
-                    String name = et_book_name.getText().toString();
-                    String genre = sp_book_genre.getSelectedItem().toString();
-                    String author = et_book_author.getText().toString();
-                    int price = Integer.parseInt(et_book_price.getText().toString());
-                    int quantity = Integer.parseInt(et_book_quantity.getText().toString());
-                    String description = et_book_description.getText().toString();
-                    final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+        bt_add_book.setOnClickListener(view -> {
+            if (imageUri != null)
+            {
+                String name = et_book_name.getText().toString();
+                String genre = sp_book_genre.getSelectedItem().toString();
+                String author = et_book_author.getText().toString();
+                int price = Integer.parseInt(et_book_price.getText().toString());
+                int quantity = Integer.parseInt(et_book_quantity.getText().toString());
+                String description = et_book_description.getText().toString();
+                final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
-                    imageReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    String key = databaseReference.push().getKey();
-                                    Book book = new Book(key, uri.toString(), name, genre, author, price, quantity, description);
-                                    databaseReference.child(genre).child(key).setValue(book);
-                                    et_book_description.setText("");
-                                    Toast.makeText(AddBook.this, "Upload", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(AddBook.this, "Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                else
-                {
-                    Toast.makeText(AddBook.this, "Please selected image", Toast.LENGTH_SHORT).show();
-                }
+                imageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                    String key = databaseReference.push().getKey();
+                    Book book = new Book(key, uri.toString(), name, genre, author, price, quantity, description, 0);
+                    databaseReference.child(genre).child(key).setValue(book);
+                    et_book_description.setText("");
+                    Toast.makeText(AddBook.this, "Upload", Toast.LENGTH_SHORT).show();
+                })).addOnFailureListener(e -> Toast.makeText(AddBook.this, "Failed", Toast.LENGTH_SHORT).show());
+            }
+            else
+            {
+                Toast.makeText(AddBook.this, "Please selected image", Toast.LENGTH_SHORT).show();
             }
         });
     }

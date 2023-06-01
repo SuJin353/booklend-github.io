@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class BookInfo extends AppCompatActivity {
     TextView tv_name_info, tv_genre_info, tv_author_info, tv_price_info, tv_quantity_info, tv_description_info;
     String key, uri, name, genre, author, description;
-    int price, quantity;
+    int price, quantity, borrowed;
     ImageView iv_book_cover;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,8 @@ public class BookInfo extends AppCompatActivity {
         price = intent.getIntExtra("PRICE",0);
         quantity = intent.getIntExtra("QUANTITY",0);
         description = intent.getStringExtra("DESCRIPTION");
+        borrowed = intent.getIntExtra("BORROWED",0);
+
     }
     void showBookInfo()
     {
@@ -85,9 +87,10 @@ public class BookInfo extends AppCompatActivity {
             else{
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                Book book = new Book(key, uri, name, genre, author, price, quantity, description);
+                Book book = new Book(key, uri, name, genre, author, price, quantity, description,borrowed);
                 databaseReference.child("Borrowed").child(uid).child(key).setValue(book);
-                databaseReference.child("Books").child(genre).child(key).child("quantity").setValue(quantity - 1);
+                databaseReference.child("Books").child(genre).child(key).child("quantity").setValue(quantity--);
+                databaseReference.child("Books").child(genre).child(key).child("borrowed").setValue(borrowed++);
 
             }
             dialogInterface.dismiss();

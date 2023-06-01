@@ -2,12 +2,12 @@ package com.example.booklendadmin;
 
 public class Book {
     private String key, imageUri, name, genre, author, description;
-    private int price, quantity;
+    private int price, quantity, borrowed;
 
     public Book() {
 
     }
-    public Book(String key, String imageUri, String name, String genre, String author, int price, int quantity, String description) {
+    public Book(String key, String imageUri, String name, String genre, String author, int price, int quantity, String description, int borrowed) {
         this.key = key;
         this.imageUri = imageUri;
         this.name = name;
@@ -16,6 +16,7 @@ public class Book {
         this.price = price;
         this.quantity = quantity;
         this.description = description;
+        this.borrowed = borrowed;
     }
     public String getKey() {
         return key;
@@ -79,4 +80,11 @@ public class Book {
         this.quantity = quantity;
     }
 
+    public int getBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(int borrowed) {
+        this.borrowed = borrowed;
+    }
 }
