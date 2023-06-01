@@ -55,23 +55,15 @@ public class Search extends AppCompatActivity {
         builder.setMessage("Are you sure you want to logout ?");
         builder.setCancelable(true);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),Login.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                dialogInterface.dismiss();
-                finish();
-            }
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(),Login.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            dialogInterface.dismiss();
+            finish();
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
 
 
         AlertDialog alertDialog = builder.create();

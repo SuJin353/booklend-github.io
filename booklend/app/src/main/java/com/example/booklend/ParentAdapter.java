@@ -1,5 +1,6 @@
 package com.example.booklend;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder>{
@@ -17,12 +17,10 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     List<ParentModelClass> parentModelClassesList;
     Context context;
     OnParentClickListener onParentClickListener;
-    public void setOnParentClickListener(OnParentClickListener onParentClickListener){
-        this.onParentClickListener = onParentClickListener;
-    }
-    public ParentAdapter(List<ParentModelClass> parentModelClassesList, Context context) {
+    public ParentAdapter(List<ParentModelClass> parentModelClassesList, Context context, OnParentClickListener onParentClickListener) {
         this.parentModelClassesList = parentModelClassesList;
         this.context = context;
+        this.onParentClickListener = onParentClickListener;
     }
 
     @NonNull
@@ -33,26 +31,15 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ParentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ParentAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tv_parent_title.setText(parentModelClassesList.get(position).title);
         ChildAdapter childAdapter;
         childAdapter = new ChildAdapter(parentModelClassesList.get(position).childModelClassesList,context);
         holder.rv_child.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
-        childAdapter.setOnChildrenClickListener(new OnChildrenClickListener() {
-            @Override
-            public void OnItemClick(int childPosition) {
-                int parentPosition = getAdapterPosition();
-                onParentClickListener.onChildItemClick(parentPosition,childPosition);
-            }
-        });
+        childAdapter.setOnChildrenClickListener(childPosition -> onParentClickListener.onChildItemClick(position, childPosition));
     }
-
-    private int getAdapterPosition() {
-        return getAdapterPosition();
-    }
-
     @Override
     public int getItemCount() {
         return parentModelClassesList.size();

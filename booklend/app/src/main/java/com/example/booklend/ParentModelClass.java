@@ -1,7 +1,6 @@
 package com.example.booklend;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParentModelClass {
     String title;

@@ -63,11 +63,11 @@ public class UserInfo extends AppCompatActivity {
     }
     void Mapping()
     {
-        tv_profile_username = (TextView) findViewById(R.id.tv_profile_username);
-        tv_profile_full_name = (TextView) findViewById(R.id.tv_profile_full_name);
-        tv_profile_credit = (TextView) findViewById(R.id.tv_profile_credit);
-        tv_profile_email = (TextView) findViewById(R.id.tv_profile_email);
-        tv_profile_phone_number = (TextView) findViewById(R.id.tv_profile_phone_number);
-        tv_profile_password = (TextView) findViewById(R.id.tv_profile_password);
+        tv_profile_username = findViewById(R.id.tv_profile_username);
+        tv_profile_full_name = findViewById(R.id.tv_profile_full_name);
+        tv_profile_credit = findViewById(R.id.tv_profile_credit);
+        tv_profile_email = findViewById(R.id.tv_profile_email);
+        tv_profile_phone_number = findViewById(R.id.tv_profile_phone_number);
+        tv_profile_password = findViewById(R.id.tv_profile_password);
     }
 }

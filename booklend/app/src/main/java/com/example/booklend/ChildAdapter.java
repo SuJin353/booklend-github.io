@@ -45,14 +45,11 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView, OnChildrenClickListener onChildrenClickListener) {
             super(itemView);
             iv_child_image = itemView.findViewById(R.id.iv_child_item);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (onChildrenClickListener != null){
-                        int childPosition = getAdapterPosition();
-                        if (childPosition != RecyclerView.NO_POSITION){
-                            onChildrenClickListener.OnItemClick(childPosition);
-                        }
+            itemView.setOnClickListener(view -> {
+                if (onChildrenClickListener != null){
+                    int childPosition = getAdapterPosition();
+                    if (childPosition != RecyclerView.NO_POSITION){
+                        onChildrenClickListener.OnItemClick(childPosition);
                     }
                 }
             });

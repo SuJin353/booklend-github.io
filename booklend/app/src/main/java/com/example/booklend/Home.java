@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,12 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity implements OnParentClickListener{
@@ -43,52 +37,48 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         setContentView(R.layout.activity_home);
         Mapping();
         BottomNavigation();
-        readData(new CallBack() {
-            @Override
-            public void onCallback(ArrayList<ChildModelClass> childArrayList, String genre) {
-                switch (genre){
-                    case "Fantasy":
-                    {
-                        fantasyArrayList = childArrayList;
-                        parentModelClassArrayList.add(new ParentModelClass(genre, fantasyArrayList));
-                        break;
-                    }
-                    case "Science Fiction":
-                    {
-                        sci_fiArrayList = childArrayList;
-                        parentModelClassArrayList.add(new ParentModelClass(genre, sci_fiArrayList));
-                        break;
-                    }
-                    case "Mystery":
-                    {
-                        mysteryArrayList = childArrayList;
-                        parentModelClassArrayList.add(new ParentModelClass(genre, mysteryArrayList));
-                        break;
-                    }
-                    case "Romance":
-                    {
-                        romanceArrayList = childArrayList;
-                        parentModelClassArrayList.add(new ParentModelClass(genre, romanceArrayList));
-                        break;
-                    }
+        readData((childArrayList, genre) -> {
+            switch (genre){
+                case "Fantasy":
+                {
+                    fantasyArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, fantasyArrayList));
+                    break;
                 }
-                onChildItemClick(1,0);
-                parentAdapter.notifyDataSetChanged();
+                case "Science Fiction":
+                {
+                    sci_fiArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, sci_fiArrayList));
+                    break;
+                }
+                case "Mystery":
+                {
+                    mysteryArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, mysteryArrayList));
+                    break;
+                }
+                case "Romance":
+                {
+                    romanceArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, romanceArrayList));
+                    break;
+                }
             }
+            parentAdapter.notifyDataSetChanged();
         });
     }
     public void readData(CallBack myCallback) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int i = 0; i < genres.length; i++) {
-                    if (snapshot.hasChild(genres[i])) {
-                        ArrayList<ChildModelClass>  childModelClassArrayList = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot : snapshot.child(genres[i]).getChildren()) {
+                for (String genre : genres) {
+                    if (snapshot.hasChild(genre)) {
+                        ArrayList<ChildModelClass> childModelClassArrayList = new ArrayList<>();
+                        for (DataSnapshot dataSnapshot : snapshot.child(genre).getChildren()) {
                             Book book = dataSnapshot.getValue(Book.class);
                             childModelClassArrayList.add(new ChildModelClass(book));
                         }
-                        myCallback.onCallback(childModelClassArrayList, genres[i]);
+                        myCallback.onCallback(childModelClassArrayList, genre);
                     }
                 }
             }
@@ -107,7 +97,7 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         sci_fiArrayList = new ArrayList<>();
         mysteryArrayList = new ArrayList<>();
         romanceArrayList = new ArrayList<>();
-        parentAdapter = new ParentAdapter(parentModelClassArrayList,Home.this);
+        parentAdapter = new ParentAdapter(parentModelClassArrayList,Home.this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(parentAdapter);
     }
