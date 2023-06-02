@@ -16,8 +16,9 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 public class BookInfo extends AppCompatActivity {
-    TextView tv_name_info, tv_genre_info, tv_author_info, tv_price_info, tv_quantity_info, tv_description_info;
+    TextView tv_name_info, tv_genre_info, tv_author_info, tv_price_info, tv_quantity_info, tv_description_info, tv_borrowed_info;
     String key, uri, name, genre, author, description;
     int price, quantity, borrowed;
     ImageView iv_book_cover;
@@ -33,8 +34,7 @@ public class BookInfo extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibt_back: {
-                Intent intent = new Intent(BookInfo.this, Home.class);
-                startActivity(intent);
+                finish();
                 break;
             }
             case R.id.bt_lend:{
@@ -51,6 +51,7 @@ public class BookInfo extends AppCompatActivity {
         tv_price_info = findViewById(R.id.tv_price_info);
         tv_quantity_info = findViewById(R.id.tv_quantity_info);
         tv_description_info = findViewById(R.id.tv_description_info);
+        tv_borrowed_info = findViewById(R.id.tv_borrowed_info);
     }
     void getInfo()
     {
@@ -64,7 +65,6 @@ public class BookInfo extends AppCompatActivity {
         quantity = intent.getIntExtra("QUANTITY",0);
         description = intent.getStringExtra("DESCRIPTION");
         borrowed = intent.getIntExtra("BORROWED",0);
-
     }
     void showBookInfo()
     {
@@ -75,6 +75,7 @@ public class BookInfo extends AppCompatActivity {
         tv_price_info.setText(String.valueOf(price));
         tv_quantity_info.setText(String.valueOf(quantity));
         tv_description_info.setText(description);
+        tv_borrowed_info.setText(String.valueOf(borrowed));
     }
     private void promptLendConfirmation() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(BookInfo.this);
@@ -87,11 +88,10 @@ public class BookInfo extends AppCompatActivity {
             else{
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                databaseReference.child("Books").child(genre).child(key).child("quantity").setValue(quantity - 1);
+                databaseReference.child("Books").child(genre).child(key).child("borrowed").setValue(borrowed + 1);
                 Book book = new Book(key, uri, name, genre, author, price, quantity, description,borrowed);
                 databaseReference.child("Borrowed").child(uid).child(key).setValue(book);
-                databaseReference.child("Books").child(genre).child(key).child("quantity").setValue(quantity--);
-                databaseReference.child("Books").child(genre).child(key).child("borrowed").setValue(borrowed++);
-
             }
             dialogInterface.dismiss();
         });

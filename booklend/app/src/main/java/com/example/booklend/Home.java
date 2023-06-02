@@ -67,28 +67,6 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
             parentAdapter.notifyDataSetChanged();
         });
     }
-    public void readData(CallBack myCallback) {
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (String genre : genres) {
-                    if (snapshot.hasChild(genre)) {
-                        ArrayList<ChildModelClass> childModelClassArrayList = new ArrayList<>();
-                        for (DataSnapshot dataSnapshot : snapshot.child(genre).getChildren()) {
-                            Book book = dataSnapshot.getValue(Book.class);
-                            childModelClassArrayList.add(new ChildModelClass(book));
-                        }
-                        myCallback.onCallback(childModelClassArrayList, genre);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
     void Mapping()
     {
         recyclerView = findViewById(R.id.rv_parent);
@@ -147,6 +125,28 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    public void readData(CallBack myCallback) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (String genre : genres) {
+                    if (snapshot.hasChild(genre)) {
+                        ArrayList<ChildModelClass> childModelClassArrayList = new ArrayList<>();
+                        for (DataSnapshot dataSnapshot : snapshot.child(genre).getChildren()) {
+                            Book book = dataSnapshot.getValue(Book.class);
+                            childModelClassArrayList.add(new ChildModelClass(book));
+                        }
+                        myCallback.onCallback(childModelClassArrayList, genre);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @Override
     public void onChildItemClick(int parentPosition, int childPosition) {

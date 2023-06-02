@@ -70,7 +70,6 @@ public class AddBook extends AppCompatActivity {
                 int quantity = Integer.parseInt(et_book_quantity.getText().toString());
                 String description = et_book_description.getText().toString();
                 final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-
                 imageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                     String key = databaseReference.push().getKey();
                     Book book = new Book(key, uri.toString(), name, genre, author, price, quantity, description, 0);
