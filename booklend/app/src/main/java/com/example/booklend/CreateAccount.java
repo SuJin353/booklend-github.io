@@ -45,11 +45,8 @@ public class CreateAccount extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()){
                         String uid = auth.getCurrentUser().getUid();
-                        databaseReference.child(uid).child("username").setValue(username);
-                        databaseReference.child(uid).child("fullname").setValue(fullname);
-                        databaseReference.child(uid).child("email").setValue(email);
-                        databaseReference.child(uid).child("password").setValue(password);
-                        databaseReference.child(uid).child("phone_number").setValue(phone_number);
+                        User user = new User(username, fullname, email, phone_number, password, 1000);
+                        databaseReference.child(uid).setValue(user);
                         Toast.makeText(CreateAccount.this,"Sign up successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(CreateAccount.this, Login.class);
                         startActivity(intent);

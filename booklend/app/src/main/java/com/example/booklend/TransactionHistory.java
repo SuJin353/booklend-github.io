@@ -17,7 +17,7 @@ public class TransactionHistory extends AppCompatActivity {
         ibt_back = findViewById(R.id.ibt_back);
 
         ibt_back.setOnClickListener(view -> {
-            Intent intent =  new Intent(TransactionHistory.this, User.class);
+            Intent intent =  new Intent(TransactionHistory.this, User_Home.class);
             startActivity(intent);
             finish();
         });

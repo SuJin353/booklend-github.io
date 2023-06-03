@@ -1,103 +1,66 @@
 package com.example.booklend;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+public class User {
+    String username, fullname, email, phone_number, password;
+    int credit;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-
-public class User extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
-        BottomNavigation();
+    public User() {
     }
-    @SuppressLint("NonConstantResourceId")
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_personal_info: {
-                Intent intent = new Intent(User.this, UserInfo.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.tv_borrowed_book: {
-                Intent intent = new Intent(User.this, BorrowedBook.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.tv_overdue_book: {
-                Intent intent = new Intent(User.this, OverdueBook.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.tv_transaction_history: {
-                Intent intent = new Intent(User.this, TransactionHistory.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.tv_buy_credit: {
-                Intent intent = new Intent(User.this, BuyCredit.class);
-                startActivity(intent);
-                break;
-            }
-        }
-        finish();
+
+    public User(String username, String fullname, String email, String phone_number, String password, int credit) {
+        this.username = username;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.password = password;
+        this.credit = credit;
     }
-    @SuppressLint("NonConstantResourceId")
-    void BottomNavigation()
-    {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigationView);
-        bottomNavigationView.setSelectedItemId(R.id.bottom_user);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.bottom_home:
-                    startActivity(new Intent(getApplicationContext(),Home.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                    return true;
-                case R.id.bottom_serach:
-                    startActivity(new Intent(getApplicationContext(), Search.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                    return true;
-                case R.id.bottom_user:
-                    return true;
-                case R.id.bottom_notification:
-                    startActivity(new Intent(getApplicationContext(),Notification.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                    return true;
-                case R.id.bottom_logout:
-                    promptLogoutConfirmation();
-                    return true;
-            }
-            return false;
-        });
+
+    public String getUsername() {
+        return username;
     }
-    private void promptLogoutConfirmation() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(User.this);
-        builder.setMessage("Are you sure you want to logout ?");
-        builder.setCancelable(true);
 
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(),Login.class));
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            dialogInterface.dismiss();
-            finish();
-        });
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+    public String getFullname() {
+        return fullname;
+    }
 
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 }

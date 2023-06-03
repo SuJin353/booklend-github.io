@@ -34,7 +34,7 @@
             android:name=".BuyCredit"
             android:exported="false" />
         <activity
-            android:name=".User"
+            android:name=".User_Home"
             android:exported="false" />
         <activity
             android:name=".BorrowedBook"

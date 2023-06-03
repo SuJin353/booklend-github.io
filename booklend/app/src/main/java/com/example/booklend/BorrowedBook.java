@@ -2,8 +2,6 @@ package com.example.booklend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
@@ -34,25 +32,22 @@ public class BorrowedBook extends AppCompatActivity {
         ReadData();
         ibt_back = findViewById(R.id.ibt_back);
         ibt_back.setOnClickListener(view -> {
-            Intent intent =  new Intent(BorrowedBook.this, User.class);
+            Intent intent =  new Intent(BorrowedBook.this, User_Home.class);
             startActivity(intent);
             finish();
         });
-        gv_borrowed_book.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(BorrowedBook.this, BookInfo.class);
-                intent.putExtra("KEY", bookArrayList.get(i).getKey());
-                intent.putExtra("IMAGE", bookArrayList.get(i).getImageUri());
-                intent.putExtra("NAME",  bookArrayList.get(i).getName());
-                intent.putExtra("GENRE",   bookArrayList.get(i).getGenre());
-                intent.putExtra("AUTHOR",   bookArrayList.get(i).getAuthor());
-                intent.putExtra("PRICE",   bookArrayList.get(i).getPrice());
-                intent.putExtra("QUANTITY",  bookArrayList.get(i).getQuantity());
-                intent.putExtra("DESCRIPTION",   bookArrayList.get(i).getDescription());
-                intent.putExtra("BORROWED",  bookArrayList.get(i).getBorrowed());
-                startActivity(intent);
-            }
+        gv_borrowed_book.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(BorrowedBook.this, BookInfo.class);
+            intent.putExtra("KEY", bookArrayList.get(i).getKey());
+            intent.putExtra("IMAGE", bookArrayList.get(i).getImageUri());
+            intent.putExtra("NAME",  bookArrayList.get(i).getName());
+            intent.putExtra("GENRE",   bookArrayList.get(i).getGenre());
+            intent.putExtra("AUTHOR",   bookArrayList.get(i).getAuthor());
+            intent.putExtra("PRICE",   bookArrayList.get(i).getPrice());
+            intent.putExtra("QUANTITY",  bookArrayList.get(i).getQuantity());
+            intent.putExtra("DESCRIPTION",   bookArrayList.get(i).getDescription());
+            intent.putExtra("BORROWED",  bookArrayList.get(i).getBorrowed());
+            startActivity(intent);
         });
     }
     void Mapping(){

@@ -31,7 +31,7 @@ public class UserInfo extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibt_back: {
-                Intent intent = new Intent(UserInfo.this, User.class);
+                Intent intent = new Intent(UserInfo.this, User_Home.class);
                 startActivity(intent);
                 break;
             }
@@ -49,11 +49,15 @@ public class UserInfo extends AppCompatActivity {
         databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tv_profile_username.setText(snapshot.child("username").getValue(String.class));
-                tv_profile_full_name.setText(snapshot.child("fullname").getValue(String.class));
-                tv_profile_email.setText(snapshot.child("email").getValue(String.class));
-                tv_profile_phone_number.setText(snapshot.child("phone_number").getValue(String.class));
-                tv_profile_password.setText(snapshot.child("password").getValue(String.class));
+                if (snapshot.exists()){
+                    User user = snapshot.getValue(User.class);
+                    tv_profile_username.setText(user.username);
+                    tv_profile_full_name.setText(user.fullname);
+                    tv_profile_credit.setText(String.valueOf(user.getCredit()));
+                    tv_profile_email.setText(user.getEmail());
+                    tv_profile_phone_number.setText(user.getPhone_number());
+                    tv_profile_password.setText(user.getPassword());
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -3,6 +3,7 @@ package com.example.booklend;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,19 +11,50 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Notification extends AppCompatActivity {
+public class User_Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
+        setContentView(R.layout.activity_user);
         BottomNavigation();
+    }
+    @SuppressLint("NonConstantResourceId")
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_personal_info: {
+                Intent intent = new Intent(User_Home.this, UserInfo.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.tv_borrowed_book: {
+                Intent intent = new Intent(User_Home.this, BorrowedBook.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.tv_overdue_book: {
+                Intent intent = new Intent(User_Home.this, OverdueBook.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.tv_transaction_history: {
+                Intent intent = new Intent(User_Home.this, TransactionHistory.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.tv_buy_credit: {
+                Intent intent = new Intent(User_Home.this, BuyCredit.class);
+                startActivity(intent);
+                break;
+            }
+        }
+        finish();
     }
     @SuppressLint("NonConstantResourceId")
     void BottomNavigation()
     {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigationView);
-        bottomNavigationView.setSelectedItemId(R.id.bottom_notification);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_user);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.bottom_home:
@@ -36,11 +68,11 @@ public class Notification extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.bottom_user:
-                    startActivity(new Intent(getApplicationContext(), User_Home.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
                     return true;
                 case R.id.bottom_notification:
+                    startActivity(new Intent(getApplicationContext(),Notification.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
                     return true;
                 case R.id.bottom_logout:
                     promptLogoutConfirmation();
@@ -50,7 +82,7 @@ public class Notification extends AppCompatActivity {
         });
     }
     private void promptLogoutConfirmation() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(User_Home.this);
         builder.setMessage("Are you sure you want to logout ?");
         builder.setCancelable(true);
 

@@ -94,7 +94,7 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
                     finish();
                     return true;
                 case R.id.bottom_user:
-                    startActivity(new Intent(getApplicationContext(), User.class));
+                    startActivity(new Intent(getApplicationContext(), User_Home.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;

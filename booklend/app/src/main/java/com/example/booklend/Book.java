@@ -1,9 +1,8 @@
 package com.example.booklend;
 
 public class Book {
-    private String key, imageUri, name, genre, author, description;
+    private String key, imageUri, name, genre, author, description, borrowed_date, return_date;
     private int price, quantity, borrowed;
-
     public Book() {
 
     }
@@ -17,6 +16,19 @@ public class Book {
         this.quantity = quantity;
         this.description = description;
         this.borrowed = borrowed;
+    }
+    public Book(String key, String imageUri, String name, String genre, String author, int price, int quantity, String description, int borrowed, String borrowed_date, String return_date) {
+        this.key = key;
+        this.imageUri = imageUri;
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.borrowed = borrowed;
+        this.borrowed_date = borrowed_date;
+        this.return_date = return_date;
     }
 
     public String getKey() {
@@ -88,5 +100,21 @@ public class Book {
 
     public void setBorrowed(int borrowed) {
         this.borrowed = borrowed;
+    }
+
+    public String getBorrowed_date() {
+        return borrowed_date;
+    }
+
+    public void setBorrowed_date(String borrowed_date) {
+        this.borrowed_date = borrowed_date;
+    }
+
+    public String getReturn_date() {
+        return return_date;
+    }
+
+    public void setReturn_date(String return_date) {
+        this.return_date = return_date;
     }
 }

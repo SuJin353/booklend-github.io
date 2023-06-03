@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -34,7 +33,7 @@ public class Search extends AppCompatActivity {
                 case R.id.bottom_serach:
                     return true;
                 case R.id.bottom_user:
-                    startActivity(new Intent(getApplicationContext(), User.class));
+                    startActivity(new Intent(getApplicationContext(), User_Home.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;

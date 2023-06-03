@@ -15,7 +15,7 @@ public class OverdueBook extends AppCompatActivity {
         setContentView(R.layout.activity_overdue_book);
         ibt_back = findViewById(R.id.ibt_back);
         ibt_back.setOnClickListener(view -> {
-            Intent intent =  new Intent(OverdueBook.this, User.class);
+            Intent intent =  new Intent(OverdueBook.this, User_Home.class);
             startActivity(intent);
             finish();
         });

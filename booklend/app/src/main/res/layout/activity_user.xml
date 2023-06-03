@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".User">
+    tools:context=".User_Home">
     <RelativeLayout
         android:id="@+id/item_rl_user"
         android:layout_width="match_parent"
