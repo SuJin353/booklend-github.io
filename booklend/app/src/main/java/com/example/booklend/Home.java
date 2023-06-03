@@ -27,8 +27,8 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
     ArrayList<ChildModelClass> sci_fiArrayList;
     ArrayList<ChildModelClass> mysteryArrayList;
     ArrayList<ChildModelClass> romanceArrayList;
-
-    String[] genres = {"Fantasy", "Science Fiction", "Mystery", "Romance"};
+    ArrayList<ChildModelClass> adventureArrayList;
+    String[] genres = {"Fantasy", "Science Fiction", "Mystery", "Romance", "Adventure"};
     ParentAdapter parentAdapter;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
@@ -63,6 +63,12 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
                     parentModelClassArrayList.add(new ParentModelClass(genre, romanceArrayList));
                     break;
                 }
+                case "Adventure":
+                {
+                    adventureArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, adventureArrayList));
+                    break;
+                }
             }
             parentAdapter.notifyDataSetChanged();
         });
@@ -75,6 +81,7 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
         sci_fiArrayList = new ArrayList<>();
         mysteryArrayList = new ArrayList<>();
         romanceArrayList = new ArrayList<>();
+        adventureArrayList = new ArrayList<>();
         parentAdapter = new ParentAdapter(parentModelClassArrayList,Home.this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(parentAdapter);

@@ -30,7 +30,6 @@ public class BorrowedBook extends AppCompatActivity {
         setContentView(R.layout.activity_borrowed_book);
         Mapping();
         ReadData();
-        ibt_back = findViewById(R.id.ibt_back);
         ibt_back.setOnClickListener(view -> {
             Intent intent =  new Intent(BorrowedBook.this, User_Home.class);
             startActivity(intent);
@@ -51,6 +50,7 @@ public class BorrowedBook extends AppCompatActivity {
         });
     }
     void Mapping(){
+        ibt_back = findViewById(R.id.ibt_back);
         gv_borrowed_book = findViewById(R.id.gv_borrowed_book);
         ibt_back = findViewById(R.id.ibt_back);
         bookArrayList = new ArrayList<>();

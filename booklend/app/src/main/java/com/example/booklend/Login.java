@@ -56,13 +56,11 @@ public class Login extends AppCompatActivity {
             case R.id.bt_create_account: {
                 Intent intent = new Intent(Login.this, CreateAccount.class);
                 startActivity(intent);
-                finish();
                 break;
             }
             case R.id.bt_forget_password: {
                 Intent intent = new Intent(Login.this, ForgetPassword.class);
                 startActivity(intent);
-                finish();
                 break;
             }
         }

@@ -1,19 +1,20 @@
 package com.example.booklend;
 
 public class User {
-    String username, fullname, email, phone_number, password;
+    String username, fullname, email, phone_number, password, uri;
     int credit;
 
     public User() {
     }
 
-    public User(String username, String fullname, String email, String phone_number, String password, int credit) {
+    public User(String uri, String username, String fullname, String email, String phone_number, String password, int credit) {
         this.username = username;
         this.fullname = fullname;
         this.email = email;
         this.phone_number = phone_number;
         this.password = password;
         this.credit = credit;
+        this.uri = uri;
     }
 
     public String getUsername() {
@@ -62,5 +63,13 @@ public class User {
 
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

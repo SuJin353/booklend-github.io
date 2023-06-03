@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,6 +60,7 @@ public class AddBook extends AppCompatActivity {
             photoPicker.setAction(Intent.ACTION_GET_CONTENT);
             photoPicker.setType("image/*");
             activityResultLauncher.launch(photoPicker);
+            iv_book_cover.setVisibility(View.GONE);
         });
         bt_add_book.setOnClickListener(view -> {
             if (imageUri != null)
@@ -69,7 +71,7 @@ public class AddBook extends AppCompatActivity {
                 int price = Integer.parseInt(et_book_price.getText().toString());
                 int quantity = Integer.parseInt(et_book_quantity.getText().toString());
                 String description = et_book_description.getText().toString();
-                final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+                final StorageReference imageReference = storageReference.child("Books").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
                 imageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> {
                     String key = databaseReference.push().getKey();
                     Book book = new Book(key, uri.toString(), name, genre, author, price, quantity, description, 0);
