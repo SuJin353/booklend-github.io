@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class BookInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_book_info);
         Mapping();
         getInfo();
@@ -102,8 +105,40 @@ public class BookInfo extends AppCompatActivity {
                     User user = snapshot.getValue(User.class);
                     UserCredit = user.getCredit();
                     if (UserCredit < price) {
-                        Toast.makeText(BookInfo.this, "You don't have enough credit", Toast.LENGTH_SHORT).show();
+                        builder.setMessage("You don't have enough credit! Buy more?");
+                        builder.setCancelable(true);
+                        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+                            Intent intent = new Intent(BookInfo.this, BuyCredit.class);
+                            startActivity(intent);
+                        });
+                        builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
                     }
+                    else if (quantity == 0) {
+                        Toast.makeText(BookInfo.this, "Out of order!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        databaseReference.child("Borrowed").child(uid).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()){
+                                    builder.setMessage("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
+                                    builder.setCancelable(true);
+                                    builder.setPositiveButton("Continue", (dialogInterface, i) -> Lend());
+                                    builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                }
+                                Lend();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                    dialogInterface.dismiss();
                 }
 
                 @Override
@@ -111,31 +146,7 @@ public class BookInfo extends AppCompatActivity {
 
                 }
             });
-            if (quantity == 0) {
-                Toast.makeText(BookInfo.this, "Out of order!", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                databaseReference.child("Borrowed").child(uid).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(BookInfo.this);
-                            builder.setMessage("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
-                            builder.setCancelable(true);
-                            builder.setPositiveButton("Continue", (dialogInterface, i) -> Lend());
-                            builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
-                            AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
-                        }
-                        Lend();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }
-            dialogInterface.dismiss();
         });
         builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = builder.create();
@@ -153,5 +164,9 @@ public class BookInfo extends AppCompatActivity {
         databaseReference.child("users").child(uid).child("credit").setValue(UserCredit - price);
         Book book = new Book(key, uri, name, genre, author, price, quantity, description, borrowed, borrowedDateAndTime, returnDateAndTime);
         databaseReference.child("Borrowed").child(uid).child(key).setValue(book);
+
+        String key = databaseReference.push().getKey();
+        TransactionInfo transactionInfo = new TransactionInfo(key, name, price, borrowedDateAndTime);
+        databaseReference.child("Transaction History").child(uid).child(key).setValue(transactionInfo);
     }
 }

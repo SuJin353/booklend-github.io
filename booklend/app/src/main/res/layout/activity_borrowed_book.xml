@@ -16,7 +16,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
         <TextView
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
@@ -50,6 +50,7 @@
             android:stretchMode="columnWidth"
             android:numColumns="4"
             android:layout_below="@id/tv_borrowed_book"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            tools:ignore="NestedScrolling" />
     </RelativeLayout>
 </ScrollView>

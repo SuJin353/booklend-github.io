@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class UserInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_user_info);
         Mapping();
         showUserInfo();
@@ -34,8 +37,6 @@ public class UserInfo extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibt_back: {
-                Intent intent = new Intent(UserInfo.this, User_Home.class);
-                startActivity(intent);
                 break;
             }
             case R.id.tv_change_info: {

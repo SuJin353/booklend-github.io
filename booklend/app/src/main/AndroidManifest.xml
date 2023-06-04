@@ -16,9 +16,11 @@
         android:theme="@style/Theme.Booklend"
         tools:targetApi="31">
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".BookInfo"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".Search"
             android:exported="false" />
         <activity
@@ -49,9 +51,11 @@
             android:name=".Home"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".CreateAccount"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="stateHidden"
             android:name=".Login"
             android:exported="true">
             <intent-filter>

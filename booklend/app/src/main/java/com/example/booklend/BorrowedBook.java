@@ -2,6 +2,7 @@ package com.example.booklend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
@@ -27,12 +28,12 @@ public class BorrowedBook extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_borrowed_book);
         Mapping();
         ReadData();
         ibt_back.setOnClickListener(view -> {
-            Intent intent =  new Intent(BorrowedBook.this, User_Home.class);
-            startActivity(intent);
             finish();
         });
         gv_borrowed_book.setOnItemClickListener((adapterView, view, i, l) -> {
