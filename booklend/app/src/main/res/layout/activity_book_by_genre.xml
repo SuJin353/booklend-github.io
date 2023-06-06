@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
     <RelativeLayout
-        android:id="@+id/item_rl_forget_password"
+        android:id="@+id/item_rl_borrowed_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton
@@ -14,10 +14,9 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            android:onClick="onClick"/>
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
         <TextView
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
@@ -32,30 +31,26 @@
             android:textSize="41sp"
             style="@style/app_name"
             tools:ignore="TextSizeCheck" />
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="360dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/tv_app_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:autofillHints="Alex@gmail.com" />
         <TextView
-            android:id="@+id/tv_change_password"
-            android:layout_width="250dp"
+            android:id="@+id/tv_genre"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_email"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/border"
-            android:minHeight="40dp"
-            android:onClick="onClick"
-            android:text="@string/change"
-            android:textAlignment="center"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="25sp"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:textSize="20sp"
+            android:layout_below="@id/tv_app_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"/>
+        <GridView
+            android:id="@+id/gv_genre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:numColumns="4"
+            android:layout_below="@id/tv_genre"
+            android:layout_marginTop="10dp"
+            tools:ignore="NestedScrolling" />
     </RelativeLayout>
 </ScrollView>

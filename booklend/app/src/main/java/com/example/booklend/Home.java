@@ -29,7 +29,11 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
     ArrayList<ChildModelClass> mysteryArrayList;
     ArrayList<ChildModelClass> romanceArrayList;
     ArrayList<ChildModelClass> adventureArrayList;
-    String[] genres = {"Fantasy", "Science Fiction", "Mystery", "Romance", "Adventure"};
+    ArrayList<ChildModelClass> comicArrayList;
+    ArrayList<ChildModelClass> fairy_talesArrayList;
+    ArrayList<ChildModelClass> historicalArrayList;
+    ArrayList<ChildModelClass> comedyArrayList;
+    String[] genres = {"Fantasy", "Science Fiction", "Mystery", "Romance", "Adventure", "Comic", "Fairy Tales", "Historical", "Comedy"};
     ParentAdapter parentAdapter;
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Books");
     @Override
@@ -72,6 +76,30 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
                     parentModelClassArrayList.add(new ParentModelClass(genre, adventureArrayList));
                     break;
                 }
+                case "Comic":
+                {
+                    comicArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, comicArrayList));
+                    break;
+                }
+                case "Fairy Tales":
+                {
+                    fairy_talesArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, fairy_talesArrayList));
+                    break;
+                }
+                case "Historical":
+                {
+                    historicalArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, historicalArrayList));
+                    break;
+                }
+                case "Comedy":
+                {
+                    comedyArrayList = childArrayList;
+                    parentModelClassArrayList.add(new ParentModelClass(genre, comedyArrayList));
+                    break;
+                }
             }
             parentAdapter.notifyDataSetChanged();
         });
@@ -80,11 +108,17 @@ public class Home extends AppCompatActivity implements OnParentClickListener{
     {
         recyclerView = findViewById(R.id.rv_parent);
         parentModelClassArrayList = new ArrayList<>();
+
         fantasyArrayList = new ArrayList<>();
         sci_fiArrayList = new ArrayList<>();
         mysteryArrayList = new ArrayList<>();
         romanceArrayList = new ArrayList<>();
         adventureArrayList = new ArrayList<>();
+        comicArrayList = new ArrayList<>();
+        fairy_talesArrayList = new ArrayList<>();
+        historicalArrayList = new ArrayList<>();
+        comedyArrayList = new ArrayList<>();
+
         parentAdapter = new ParentAdapter(parentModelClassArrayList,Home.this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(parentAdapter);

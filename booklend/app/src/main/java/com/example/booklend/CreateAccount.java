@@ -5,12 +5,10 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,20 +96,40 @@ public class CreateAccount extends AppCompatActivity {
                 }
                 else
                 {
-                    imageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl().addOnSuccessListener(uri -> auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()){
-                            String uid = auth.getCurrentUser().getUid();
-                            User user = new User(uri.toString(), username, fullname, email, phone_number, password, 1000);
-                            databaseReference.child(uid).setValue(user);
-                            Toast.makeText(CreateAccount.this,"Sign up successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(CreateAccount.this, Login.class);
-                            startActivity(intent);
-                                finish();
-                            }
-                        else {
-                            Toast.makeText(CreateAccount.this,"Sign up failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }))).addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Sign up failed", Toast.LENGTH_SHORT).show());
+                    imageReference.putFile(imageUri)
+                            .addOnSuccessListener(taskSnapshot -> imageReference.getDownloadUrl()
+                                    .addOnSuccessListener(uri -> auth.createUserWithEmailAndPassword(email,password)
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()){
+                                                    auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
+                                                        if (task1.isSuccessful()){
+                                                            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task11 -> {
+                                                                if (task11.isSuccessful()){
+                                                                    if (auth.getCurrentUser().isEmailVerified()){
+                                                                        String uid = auth.getCurrentUser().getUid();
+                                                                        User user = new User(uri.toString(), username, fullname, email, phone_number, password, 1000);
+                                                                        databaseReference.child(uid).setValue(user);
+                                                                        Toast.makeText(CreateAccount.this,"Sign up successful. Check your email for verification", Toast.LENGTH_SHORT).show();
+                                                                        Intent intent = new Intent(CreateAccount.this, Login.class);
+                                                                        startActivity(intent);
+                                                                        finish();
+                                                                    }
+                                                                    else {
+                                                                        Toast.makeText(CreateAccount.this,"Please verify your email", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            Toast.makeText(CreateAccount.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+
+                                                }
+                                                else {
+                                                    Toast.makeText(CreateAccount.this,"Sign up failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                    }))).addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Get image failed", Toast.LENGTH_SHORT).show());
 
                 }
             }

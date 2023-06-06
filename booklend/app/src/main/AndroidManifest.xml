@@ -16,13 +16,16 @@
         android:theme="@style/Theme.Booklend"
         tools:targetApi="31">
         <activity
-            android:windowSoftInputMode="stateHidden"
-            android:name=".BookInfo"
+            android:name=".BookByGenre"
             android:exported="false" />
         <activity
-            android:windowSoftInputMode="stateHidden"
+            android:name=".BookInfo"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".Search"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Notification"
             android:exported="false" />
@@ -51,13 +54,13 @@
             android:name=".Home"
             android:exported="false" />
         <activity
-            android:windowSoftInputMode="stateHidden"
             android:name=".CreateAccount"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
-            android:windowSoftInputMode="stateHidden"
             android:name=".Login"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

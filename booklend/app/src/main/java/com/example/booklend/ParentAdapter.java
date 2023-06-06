@@ -2,6 +2,7 @@ package com.example.booklend;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,11 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
         childAdapter.setOnChildrenClickListener(childPosition -> onParentClickListener.onChildItemClick(position, childPosition));
+        holder.tv_parent_title.setOnClickListener( (view) -> {
+            Intent intent = new Intent(context, BookByGenre.class);
+            intent.putExtra("GENRE", holder.tv_parent_title.getText());
+            context.startActivity(intent);
+        });
     }
     @Override
     public int getItemCount() {
