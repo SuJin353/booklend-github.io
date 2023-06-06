@@ -50,7 +50,7 @@
             android:stretchMode="columnWidth"
             android:numColumns="4"
             android:layout_below="@id/tv_genre"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             tools:ignore="NestedScrolling" />
     </RelativeLayout>
 </ScrollView>

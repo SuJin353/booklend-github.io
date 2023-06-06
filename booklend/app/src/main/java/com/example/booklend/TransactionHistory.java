@@ -1,6 +1,5 @@
 package com.example.booklend;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -33,9 +32,7 @@ public class TransactionHistory extends AppCompatActivity {
         setContentView(R.layout.activity_transaction_history);
         Mapping();
         ReadData();
-        ibt_back.setOnClickListener(view -> {
-            finish();
-        });
+        ibt_back.setOnClickListener(view -> finish());
     }
     void Mapping(){
         ibt_back = findViewById(R.id.ibt_back);

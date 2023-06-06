@@ -1,7 +1,9 @@
 package com.example.booklend;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -33,6 +35,10 @@ public class BorrowedBook extends AppCompatActivity {
         setContentView(R.layout.activity_borrowed_book);
         Mapping();
         ReadData();
+        Click();
+    }
+    void Click()
+    {
         ibt_back.setOnClickListener(view -> {
             finish();
         });

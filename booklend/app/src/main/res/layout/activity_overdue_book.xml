@@ -50,6 +50,6 @@
             android:stretchMode="columnWidth"
             android:numColumns="4"
             android:layout_below="@id/tv_overdue_book"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
     </RelativeLayout>
 </ScrollView>

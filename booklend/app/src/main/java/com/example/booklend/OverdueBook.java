@@ -1,6 +1,5 @@
 package com.example.booklend;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -17,8 +16,6 @@ public class OverdueBook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overdue_book);
         ibt_back = findViewById(R.id.ibt_back);
-        ibt_back.setOnClickListener(view -> {
-            finish();
-        });
+        ibt_back.setOnClickListener(view -> finish());
     }
 }

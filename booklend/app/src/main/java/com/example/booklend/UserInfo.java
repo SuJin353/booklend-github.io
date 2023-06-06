@@ -40,7 +40,7 @@ public class UserInfo extends AppCompatActivity {
                 break;
             }
             case R.id.tv_change_info: {
-                Intent intent = new Intent(UserInfo.this, BorrowedBook.class);
+                Intent intent = new Intent(UserInfo.this, ChangeUserInfo.class);
                 startActivity(intent);
                 break;
             }

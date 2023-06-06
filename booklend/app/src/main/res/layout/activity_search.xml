@@ -5,13 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Search"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
+    android:layout_height="wrap_content">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_above="@id/bottom_app_bar">
         <RelativeLayout
+            android:id="@+id/rl_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -27,37 +28,30 @@
                 android:textSize="41sp"
                 style="@style/app_name"
                 tools:ignore="TextSizeCheck" />
-            <EditText
-                android:id="@+id/et_book_name"
-                android:layout_width="310dp"
-                android:layout_height="48dp"
-                android:layout_below="@id/tv_app_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:hint="@string/search"
-                android:inputType="textLongMessage"
-                android:autofillHints="Math" />
-            <ImageButton
-                android:id="@+id/ibt_search"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/tv_app_name"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@id/et_book_name"
-                android:background="@drawable/ic_search"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-            <GridView
-                android:id="@+id/gv_borrowed_book"
+            <SearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:verticalSpacing="2dp"
-                android:horizontalSpacing="2dp"
-                android:stretchMode="columnWidth"
-                android:numColumns="4"
-                android:layout_below="@id/et_book_name"
-                android:layout_marginTop="10dp"/>
+                android:layout_below="@id/tv_app_name"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:queryHint="@string/search"
+                android:iconifiedByDefault="false"
+                android:background="@drawable/border" />
         </RelativeLayout>
-    </ScrollView>
+        <GridView
+            android:id="@+id/gv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:verticalSpacing="2dp"
+            android:horizontalSpacing="2dp"
+            android:stretchMode="columnWidth"
+            android:numColumns="4"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/rl_search"
+            android:overScrollMode="never"/>
+    </RelativeLayout>
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,3 +70,5 @@
             app:menu="@menu/bottom_menu"/>
     </com.google.android.material.bottomappbar.BottomAppBar>
 </RelativeLayout>
+
+
