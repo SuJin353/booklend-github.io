@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class UserInfo extends AppCompatActivity {
-    TextView tv_profile_username, tv_profile_full_name, tv_profile_credit, tv_profile_email, tv_profile_phone_number, tv_profile_password;
+    TextView tv_profile_username, tv_profile_full_name, tv_profile_credit, tv_profile_email, tv_profile_phone_number, tv_profile_password, tv_uid_info;
     ImageView iv_profile_avatar;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("users");
@@ -63,6 +63,7 @@ public class UserInfo extends AppCompatActivity {
                     tv_profile_email.setText(user.getEmail());
                     tv_profile_phone_number.setText(user.getPhone_number());
                     tv_profile_password.setText(user.getPassword());
+                    tv_uid_info.setText(uid);
                 }
             }
             @Override
@@ -73,6 +74,7 @@ public class UserInfo extends AppCompatActivity {
     }
     void Mapping()
     {
+        tv_uid_info = findViewById(R.id.tv_uid_info);
         iv_profile_avatar = findViewById(R.id.iv_profile_avatar);
         tv_profile_username = findViewById(R.id.tv_profile_username);
         tv_profile_full_name = findViewById(R.id.tv_profile_full_name);

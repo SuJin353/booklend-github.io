@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +25,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class BookInfo extends AppCompatActivity {
     TextView tv_name_info, tv_genre_info, tv_author_info, tv_price_info, tv_quantity_info, tv_description_info, tv_borrowed_info;
-    String key, uri, name, genre, author, description;
+    EditText et_comment;
+    ListView lv_comment;
+    CommentAdapter adapter;
+    ArrayList<Comment> commentArrayList;
+    String key, uri, name, genre, author, description, username, user_uri;
     int price, quantity, borrowed, UserCredit;
     ImageView iv_book_cover;
     String uid;
@@ -42,6 +51,7 @@ public class BookInfo extends AppCompatActivity {
         Mapping();
         getInfo();
         showBookInfo();
+        ShowComment();
     }
     @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
@@ -50,8 +60,12 @@ public class BookInfo extends AppCompatActivity {
                 finish();
                 break;
             }
-            case R.id.bt_lend:{
+            case R.id.bt_lend: {
                 promptLendConfirmation();
+                break;
+            }
+            case R.id.ibt_send_comment: {
+                SendComment();
                 break;
             }
         }
@@ -65,6 +79,11 @@ public class BookInfo extends AppCompatActivity {
         tv_quantity_info = findViewById(R.id.tv_quantity_info);
         tv_description_info = findViewById(R.id.tv_description_info);
         tv_borrowed_info = findViewById(R.id.tv_borrowed_info);
+        et_comment = findViewById(R.id.et_comment);
+        lv_comment = findViewById(R.id.lv_comment);
+        commentArrayList = new ArrayList<>();
+        adapter = new CommentAdapter(commentArrayList,this);
+        lv_comment.setAdapter(adapter);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference();
     }
@@ -80,7 +99,6 @@ public class BookInfo extends AppCompatActivity {
         quantity = intent.getIntExtra("QUANTITY",0);
         borrowed = intent.getIntExtra("BORROWED",0);
         description = intent.getStringExtra("DESCRIPTION");
-
     }
     void showBookInfo()
     {
@@ -92,62 +110,58 @@ public class BookInfo extends AppCompatActivity {
         tv_quantity_info.setText(String.valueOf(quantity));
         tv_borrowed_info.setText(String.valueOf(borrowed));
         tv_description_info.setText(description);
-
     }
     private void promptLendConfirmation() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(BookInfo.this);
         builder.setMessage("Are you sure you want to lend this book?");
         builder.setCancelable(true);
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-            databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    User user = snapshot.getValue(User.class);
-                    UserCredit = user.getCredit();
-                    if (UserCredit < price) {
-                        builder.setMessage("You don't have enough credit! Buy more?");
-                        builder.setCancelable(true);
-                        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-                            Intent intent = new Intent(BookInfo.this, BuyCredit.class);
-                            startActivity(intent);
-                        });
-                        builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
-                    }
-                    else if (quantity == 0) {
-                        Toast.makeText(BookInfo.this, "Out of order!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        databaseReference.child("Borrowed").child(uid).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()){
-                                    builder.setMessage("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
-                                    builder.setCancelable(true);
-                                    builder.setPositiveButton("Continue", (dialogInterface, i) -> Lend());
-                                    builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
-                                    AlertDialog alertDialog = builder.create();
-                                    alertDialog.show();
-                                }
-                                Lend();
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-                    dialogInterface.dismiss();
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                UserCredit = user.getCredit();
+                if (UserCredit < price) {
+                    builder.setMessage("You don't have enough credit! Buy more?");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+                        Intent intent = new Intent(BookInfo.this, BuyCredit.class);
+                        startActivity(intent);
+                    });
+                    builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                else if (quantity == 0) {
+                    Toast.makeText(BookInfo.this, "Out of order!", Toast.LENGTH_SHORT).show();
                 }
-            });
+                else{
+                    databaseReference.child("Borrowed").child(uid).child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                builder.setMessage("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
+                                builder.setCancelable(true);
+                                builder.setPositiveButton("Continue", (dialogInterface, i) -> Lend());
+                                builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
+                            Lend();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-        });
+                        }
+                    });
+                }
+                dialogInterface.dismiss();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }));
         builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -168,5 +182,44 @@ public class BookInfo extends AppCompatActivity {
         String key = databaseReference.push().getKey();
         TransactionInfo transactionInfo = new TransactionInfo(key, name, price, borrowedDateAndTime);
         databaseReference.child("Transaction History").child(uid).child(key).setValue(transactionInfo);
+    }
+    void SendComment()
+    {
+        et_comment.getText().toString();
+        databaseReference.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy_HH:mm:ss", Locale.getDefault());
+                String currentDateAndTime = sdf.format(new Date());
+                User user = snapshot.getValue(User.class);
+                username = user.getUsername();
+                user_uri = user.getUri();
+                Comment comment= new Comment(username, user_uri, et_comment.getText().toString(), currentDateAndTime);
+                databaseReference.child("Comment").child(key).child(uid).setValue(comment);
+                ShowComment();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    void ShowComment()
+    {
+        databaseReference.child("Comment").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    commentArrayList.add(ds.getValue(Comment.class));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

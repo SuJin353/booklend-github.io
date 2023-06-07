@@ -11,80 +11,180 @@
         android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="41sp"
-        style="@style/app_name"
-        tools:ignore="TextSizeCheck" />
-    <TextView
-        android:id="@+id/tv_personal_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_app_name"
-        android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        style="@style/app_name"
+        tools:ignore="TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/iv_personal_info"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/tv_app_name"
+        android:layout_alignStart="@id/tv_app_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_circle_user"
+        android:backgroundTint="@color/teal_200"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/tv_personal_info"
+        style="@style/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/iv_personal_info"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/iv_personal_info"
         android:onClick="onClick"
         android:text="@string/personal_info"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_arrow_forward"
+        android:layout_alignTop="@id/iv_personal_info"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@id/tv_personal_info"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_borrowed_book"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_personal_info"
+        android:layout_alignStart="@id/tv_app_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_circle_book"
+        android:backgroundTint="@color/teal_700"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
     <TextView
         android:id="@+id/tv_borrowed_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_personal_info"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/iv_borrowed_book"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/iv_borrowed_book"
         android:onClick="onClick"
         android:text="@string/borrowed_book"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_arrow_forward"
+        android:layout_alignTop="@id/iv_borrowed_book"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@id/tv_personal_info"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_overdue_book"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_borrowed_book"
+        android:layout_alignStart="@id/tv_app_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_overdue_book"
+        android:backgroundTint="@color/red"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
     <TextView
         android:id="@+id/tv_overdue_book"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_borrowed_book"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/iv_overdue_book"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/iv_overdue_book"
         android:onClick="onClick"
         android:text="@string/overdue_book"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_arrow_forward"
+        android:layout_alignTop="@id/iv_overdue_book"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@id/tv_personal_info"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_transaction_history"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_overdue_book"
+        android:layout_alignStart="@id/tv_app_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_circle_transaction_history"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
     <TextView
         android:id="@+id/tv_transaction_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_overdue_book"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/iv_transaction_history"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/iv_transaction_history"
         android:onClick="onClick"
         android:text="@string/transaction_history"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_arrow_forward"
+        android:layout_alignTop="@id/iv_transaction_history"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@id/tv_personal_info"/>
+
+    <ImageView
+        android:id="@+id/iv_buy_credit"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_transaction_history"
+        android:layout_alignStart="@id/tv_app_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_circle_buy_credit_24"
+        android:backgroundTint="@color/orange"
+        tools:ignore="ImageContrastCheck" />
+
     <TextView
         android:id="@+id/tv_buy_credit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_transaction_history"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/iv_buy_credit"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/iv_buy_credit"
         android:onClick="onClick"
         android:text="@string/buy_credit"
         android:textColor="@color/black"
         android:textSize="20sp"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_arrow_forward"
+        android:layout_alignTop="@id/iv_buy_credit"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@id/tv_personal_info"/>
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -93,13 +193,14 @@
         android:background="@color/white"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
-        tools:ignore="BottomAppBar">
+        tools:ignore="BottomAppBar,VisualLintBottomAppBar">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:layout_marginEnd="19dp"
-            app:menu="@menu/bottom_menu"/>
+            app:menu="@menu/bottom_menu"
+            tools:ignore="VisualLintBottomNav" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 </RelativeLayout>

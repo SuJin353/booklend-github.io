@@ -13,10 +13,10 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 
-public class ListViewAdapter extends BaseAdapter {
+public class TransactionAdapter extends BaseAdapter {
     ArrayList<TransactionInfo> transactionInfoArrayList;
     Context context;
-    public ListViewAdapter(Context context, ArrayList<TransactionInfo> transactionInfoArrayList)
+    public TransactionAdapter(Context context, ArrayList<TransactionInfo> transactionInfoArrayList)
     {
         this.context = context;
         this.transactionInfoArrayList = transactionInfoArrayList;

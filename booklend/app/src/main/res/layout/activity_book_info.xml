@@ -16,127 +16,134 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
+            android:backgroundTint="@color/teal_700"
             android:onClick="onClick"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
-        <TextView
-            android:id="@+id/tv_app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ibt_back"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="41sp"
-            style="@style/app_name"
-            tools:ignore="TextSizeCheck" />
-
         <ImageView
             android:id="@+id/iv_book_cover"
             android:layout_width="110dp"
             android:layout_height="165dp"
-            android:layout_below="@+id/tv_app_name"
+            android:layout_below="@+id/ibt_back"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"/>
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_app_name"
+            android:layout_below="@id/ibt_back"
             android:layout_alignBaseline="@id/iv_book_cover"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_toEndOf="@id/iv_book_cover"
             android:text="@string/name"
-            android:textSize="17sp"/>
+            android:textColor="#00838F"
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/tv_name_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_name"
+            android:layout_alignEnd="@id/tv_description_info"
             android:layout_toEndOf="@id/tv_borrowed"
             android:layout_marginStart="5dp"
             android:text=""
             android:textSize="17sp"
-            android:textAlignment="center"/>
+            android:textColor="@color/black"/>
+
         <TextView
             android:id="@+id/tv_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_name_info"
             android:layout_alignStart="@id/tv_name"
-            android:text="@string/genre"
             android:layout_marginTop="5dp"
-            android:textSize="17sp"/>
+            android:text="@string/genre"
+            android:textColor="#00838F"
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/tv_genre_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_genre"
+            android:layout_alignEnd="@id/tv_description_info"
             android:layout_alignStart="@id/tv_name_info"
             android:text=""
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
         <TextView
             android:id="@+id/tv_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_genre_info"
             android:layout_alignStart="@id/tv_name"
-            android:text="@string/author"
             android:layout_marginTop="5dp"
-            android:textSize="17sp"/>
+            android:text="@string/author"
+            android:textColor="#00838F"
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/tv_author_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_author"
+            android:layout_alignEnd="@id/tv_description_info"
             android:layout_alignStart="@id/tv_name_info"
             android:text=""
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_author_info"
             android:layout_alignStart="@id/tv_name"
-            android:text="@string/price"
             android:layout_marginTop="5dp"
-            android:textSize="17sp"/>
+            android:text="@string/price"
+            android:textColor="#00838F"
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/tv_price_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_price"
             android:layout_alignStart="@id/tv_name_info"
+            android:layout_alignEnd="@id/tv_description_info"
             android:text=""
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
         <TextView
             android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_price_info"
             android:layout_alignStart="@id/tv_name"
-            android:text="@string/quantity"
             android:layout_marginTop="5dp"
-            android:textSize="17sp"/>
+            android:text="@string/quantity"
+            android:textColor="#00838F"
+            android:textSize="17sp" />
         <TextView
             android:id="@+id/tv_quantity_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_quantity"
             android:layout_alignStart="@id/tv_name_info"
+            android:layout_alignEnd="@id/tv_description_info"
             android:text=""
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
+
         <TextView
             android:id="@+id/tv_borrowed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_quantity_info"
             android:layout_alignStart="@id/tv_name"
-            android:text="@string/borrowed"
             android:layout_marginTop="5dp"
+            android:text="@string/borrowed"
+            android:textColor="#00838F"
             android:textSize="17sp"/>
         <TextView
             android:id="@+id/tv_borrowed_info"
@@ -144,38 +151,41 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/tv_borrowed"
             android:layout_alignStart="@id/tv_name_info"
+            android:layout_alignEnd="@id/tv_description_info"
             android:text=""
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="@color/black"/>
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/description"
             android:textSize="15sp"
+            android:textColor="@color/black"
+            style="@style/app_name"
             android:layout_below="@id/iv_book_cover"
-            android:layout_alignStart="@id/iv_book_cover"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"/>
-        <Button
+
+        <ImageButton
             android:id="@+id/bt_lend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tv_description"
+            android:layout_alignTop="@id/ibt_back"
             android:layout_alignEnd="@id/tv_description_info"
             android:layout_marginTop="5dp"
-            android:text="@string/lend"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent"
+            android:background="@drawable/ic_add"
             android:onClick="onClick"
-            />
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         <TextView
             android:id="@+id/tv_description_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:layout_below="@id/bt_lend"
+            android:textColor="@color/teal_700"
+            android:layout_below="@id/tv_description"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_alignStart="@id/tv_description"/>
         <TextView
             android:id="@+id/tv_comment"
@@ -183,19 +193,34 @@
             android:layout_height="wrap_content"
             android:text="@string/comment"
             android:textSize="15sp"
+            android:textColor="@color/black"
+            style="@style/app_name"
             android:layout_below="@id/tv_description_info"
             android:layout_alignStart="@id/tv_description"
             android:layout_marginTop="10dp"/>
         <EditText
             android:id="@+id/et_comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_comment"
-            android:layout_alignStart="@id/tv_description"
-            android:layout_alignEnd="@id/tv_description_info"
-            android:layout_marginTop="10dp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+            android:layout_height="30dp"
+            android:layout_alignTop="@id/ibt_send_comment"
+            android:layout_alignStart="@id/ibt_back"
+            android:paddingStart="5dp"
+            android:layout_toStartOf="@id/ibt_send_comment"
+            android:background="@drawable/border"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintTextFieldSize"
             android:inputType="textLongMessage" />
+
+        <ImageButton
+            android:id="@+id/ibt_send_comment"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/tv_comment"
+            android:layout_alignEnd="@id/bt_lend"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_send"
+            android:backgroundTint="@color/teal_700"
+            android:onClick="onClick"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         <ListView
             android:id="@+id/lv_comment"
             android:layout_width="match_parent"

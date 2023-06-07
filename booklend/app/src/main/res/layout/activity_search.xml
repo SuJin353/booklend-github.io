@@ -19,13 +19,11 @@
                 android:id="@+id/tv_app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="41sp"
+                android:textSize="25sp"
                 style="@style/app_name"
                 tools:ignore="TextSizeCheck" />
             <SearchView
@@ -47,8 +45,8 @@
             android:verticalSpacing="2dp"
             android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
-            android:numColumns="4"
-            android:layout_marginTop="10dp"
+            android:numColumns="3"
+            android:layout_marginTop="15dp"
             android:layout_below="@id/rl_search"
             android:overScrollMode="never"/>
     </RelativeLayout>

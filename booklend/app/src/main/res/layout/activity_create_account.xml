@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
     <RelativeLayout
         android:id="@+id/item_rl_create_account"
@@ -16,6 +15,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
+            android:backgroundTint="@color/teal_700"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"
             android:onClick="onClick"/>
         <TextView
@@ -105,11 +105,13 @@
             android:autofillHints="Alex1234!" />
         <TextView
             android:id="@+id/tv_create"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_confirm_password"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/et_email"
+            android:layout_alignEnd="@id/et_email"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="35dp"
             android:background="@drawable/border"
             android:onClick="onClick"
             android:text="@string/create"

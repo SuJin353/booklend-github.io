@@ -2,6 +2,7 @@ package com.example.booklend;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ public class BookByGenre extends AppCompatActivity {
     String genre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_by_genre);
         Mapping();

@@ -16,21 +16,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_back"
+            android:backgroundTint="@color/teal_700"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
-        <TextView
-            android:id="@+id/tv_app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ibt_back"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="41sp"
-            style="@style/app_name"
-            tools:ignore="TextSizeCheck" />
         <TextView
             android:id="@+id/tv_overdue_book"
             android:layout_width="wrap_content"
@@ -38,8 +25,9 @@
             android:text="@string/overdue_book"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_below="@id/tv_app_name"
-            android:layout_marginTop="10dp"
+            style="@style/app_name"
+            android:layout_alignTop="@id/ibt_back"
+            android:layout_toEndOf="@id/ibt_back"
             android:layout_marginStart="15dp"/>
         <GridView
             android:id="@+id/gv_overdue_book"
@@ -48,8 +36,8 @@
             android:verticalSpacing="2dp"
             android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
-            android:numColumns="4"
+            android:numColumns="3"
             android:layout_below="@id/tv_overdue_book"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="15dp"/>
     </RelativeLayout>
 </ScrollView>

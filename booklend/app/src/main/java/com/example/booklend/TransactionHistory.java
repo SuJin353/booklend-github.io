@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TransactionHistory extends AppCompatActivity {
     ImageButton ibt_back;
     ListView lv_transaction_history;
-    ListViewAdapter listViewAdapter;
+    TransactionAdapter transactionAdapter;
     ArrayList<TransactionInfo> transactionInfoArrayList;
     String uid;
     DatabaseReference databaseReference;
@@ -38,8 +38,8 @@ public class TransactionHistory extends AppCompatActivity {
         ibt_back = findViewById(R.id.ibt_back);
         lv_transaction_history = findViewById(R.id.lv_transaction_history);
         transactionInfoArrayList = new ArrayList<>();
-        listViewAdapter = new ListViewAdapter(this, transactionInfoArrayList);
-        lv_transaction_history.setAdapter(listViewAdapter);
+        transactionAdapter = new TransactionAdapter(this, transactionInfoArrayList);
+        lv_transaction_history.setAdapter(transactionAdapter);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Transaction History").child(uid);
     }
@@ -52,7 +52,7 @@ public class TransactionHistory extends AppCompatActivity {
                         TransactionInfo transactionInfo = ds.getValue(TransactionInfo.class);
                         transactionInfoArrayList.add(transactionInfo);
                     }
-                    listViewAdapter.notifyDataSetChanged();
+                    transactionAdapter.notifyDataSetChanged();
                 }
             }
 

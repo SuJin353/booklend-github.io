@@ -3,5 +3,6 @@
     <string name="btn_back">Back</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone number</string>
+    <string name="uid">Uid:</string>
     <string name="create">Create</string>
 </resources>

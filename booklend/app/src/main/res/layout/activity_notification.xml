@@ -18,13 +18,11 @@
                 android:id="@+id/tv_app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="41sp"
+                android:textSize="25sp"
                 style="@style/app_name"
                 tools:ignore="TextSizeCheck" />
             <TextView
@@ -36,7 +34,7 @@
                 android:textSize="20sp"
                 android:layout_below="@id/tv_app_name"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="20dp"/>
             <ListView
                 android:id="@+id/lv_notification"
                 android:layout_width="match_parent"

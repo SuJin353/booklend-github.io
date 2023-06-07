@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
         childAdapter.setOnChildrenClickListener(childPosition -> onParentClickListener.onChildItemClick(position, childPosition));
-        holder.tv_parent_title.setOnClickListener( (view) -> {
+        holder.ibt_all.setOnClickListener( (view) -> {
             Intent intent = new Intent(context, BookByGenre.class);
             intent.putExtra("GENRE", holder.tv_parent_title.getText());
             context.startActivity(intent);
@@ -54,10 +55,12 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
         RecyclerView rv_child;
         TextView tv_parent_title;
+        ImageButton ibt_all;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rv_child = itemView.findViewById(R.id.rv_child);
             tv_parent_title = itemView.findViewById(R.id.tv_title);
+            ibt_all = itemView.findViewById(R.id.ibt_all);
         }
     }
 }
