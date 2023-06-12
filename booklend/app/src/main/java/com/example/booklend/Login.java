@@ -39,10 +39,15 @@ public class Login extends AppCompatActivity {
                     if (!password.isEmpty())
                     {
                         auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(authResult -> {
-                            Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Login.this, Home.class);
-                            startActivity(intent);
-                            finish();
+                            if (auth.getCurrentUser().isEmailVerified()){
+                                Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Login.this, Home.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(Login.this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                            }
                         }).addOnFailureListener(e -> Toast.makeText(Login.this, "Login failed", Toast.LENGTH_SHORT).show());
                     }
                     else {

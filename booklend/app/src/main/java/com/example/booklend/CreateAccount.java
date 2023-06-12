@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -101,36 +103,28 @@ public class CreateAccount extends AppCompatActivity {
                                     .addOnSuccessListener(uri -> auth.createUserWithEmailAndPassword(email,password)
                                             .addOnCompleteListener(task -> {
                                                 if (task.isSuccessful()){
-                                                    auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
-                                                        if (task1.isSuccessful()){
-                                                            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task11 -> {
-                                                                if (task11.isSuccessful()){
-                                                                    if (auth.getCurrentUser().isEmailVerified()){
-                                                                        String uid = auth.getCurrentUser().getUid();
-                                                                        User user = new User(uri.toString(), username, fullname, email, phone_number, password, 1000);
-                                                                        databaseReference.child(uid).setValue(user);
-                                                                        Toast.makeText(CreateAccount.this,"Sign up successful. Check your email for verification", Toast.LENGTH_SHORT).show();
-                                                                        Intent intent = new Intent(CreateAccount.this, Login.class);
-                                                                        startActivity(intent);
-                                                                        finish();
-                                                                    }
-                                                                    else {
-                                                                        Toast.makeText(CreateAccount.this,"Please verify your email", Toast.LENGTH_SHORT).show();
-                                                                    }
+                                                    auth.getCurrentUser().sendEmailVerification()
+                                                            .addOnSuccessListener(task1 -> {
+                                                                String uid = auth.getCurrentUser().getUid();
+                                                                User user = new User(uri.toString(), username, fullname, email, phone_number, password, 1000);
+                                                                databaseReference.child(uid).setValue(user);
+                                                                Toast.makeText(CreateAccount.this,"Sign up successful. Check your email for verification", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(CreateAccount.this, Login.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(CreateAccount.this,"Email not send", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
-                                                        }
-                                                        else {
-                                                            Toast.makeText(CreateAccount.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-
                                                 }
                                                 else {
                                                     Toast.makeText(CreateAccount.this,"Sign up failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
-                    }))).addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Get image failed", Toast.LENGTH_SHORT).show());
-
+                    })))
+                            .addOnFailureListener(e -> Toast.makeText(CreateAccount.this, "Get image failed", Toast.LENGTH_SHORT).show());
                 }
             }
             else
