@@ -37,6 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/up"
+            android:onClick="onClick"
             android:contentDescription="Upload Image"
             tools:ignore="HardcodedText,ImageContrastCheck" />
         <TextView

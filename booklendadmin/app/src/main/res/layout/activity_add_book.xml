@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/et_book_description"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
             android:layout_alignStart="@id/et_book_description"
             android:layout_alignEnd="@id/et_book_description"
@@ -179,6 +179,7 @@
             android:id="@+id/bottom_app_bar"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/bt_add_book"
+            android:layout_marginTop="5dp"
             app:fabCradleMargin="10dp"
             app:fabCradleRoundedCornerRadius="50dp"
             tools:ignore="BottomAppBar">

@@ -43,12 +43,12 @@ public class EditBook extends AppCompatActivity {
             Intent intent = new Intent(EditBook.this, BookInfo.class);
             intent.putExtra("KEY", bookArrayList.get(i).getKey());
             intent.putExtra("IMAGE", bookArrayList.get(i).getImageUri());
-            intent.putExtra("NAME",  bookArrayList.get(i).getName());
-            intent.putExtra("GENRE",   bookArrayList.get(i).getGenre());
-            intent.putExtra("AUTHOR",   bookArrayList.get(i).getAuthor());
-            intent.putExtra("PRICE",   bookArrayList.get(i).getPrice());
-            intent.putExtra("QUANTITY",  bookArrayList.get(i).getQuantity());
-            intent.putExtra("DESCRIPTION",   bookArrayList.get(i).getDescription());
+            intent.putExtra("NAME", bookArrayList.get(i).getName());
+            intent.putExtra("GENRE", bookArrayList.get(i).getGenre());
+            intent.putExtra("AUTHOR", bookArrayList.get(i).getAuthor());
+            intent.putExtra("PRICE", bookArrayList.get(i).getPrice());
+            intent.putExtra("QUANTITY", bookArrayList.get(i).getQuantity());
+            intent.putExtra("DESCRIPTION", bookArrayList.get(i).getDescription());
             startActivity(intent);
         });
     }

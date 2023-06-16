@@ -41,7 +41,7 @@ public class ChangeUserInfo extends AppCompatActivity {
     String uid, current_uri;
     Uri new_uri;
     DatabaseReference databaseReference;
-    private StorageReference storageReference;
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class ChangeUserInfo extends AppCompatActivity {
         ShowCurrentInfo();
     }
     @SuppressLint("NonConstantResourceId")
-    public void onClick(View view)
+    private void onClick(View view)
     {
         switch (view.getId())
         {
@@ -71,7 +71,7 @@ public class ChangeUserInfo extends AppCompatActivity {
                 break;
         }
     }
-    void Mapping()
+    private void Mapping()
     {
         iv_change_profile_pic = findViewById(R.id.iv_change_profile_pic);
         et_change_username = findViewById(R.id.et_change_username);
@@ -100,7 +100,7 @@ public class ChangeUserInfo extends AppCompatActivity {
                 }
             }
     );
-    void ChangeInfo()
+    private void ChangeInfo()
     {
         String username = et_change_username.getText().toString().trim();
         String fullname = et_change_full_name.getText().toString().trim();
@@ -163,7 +163,7 @@ public class ChangeUserInfo extends AppCompatActivity {
             finish();
         }
     }
-    void ShowCurrentInfo()
+    private void ShowCurrentInfo()
     {
         Intent intent = getIntent();
         current_uri = intent.getStringExtra("PROFILE_AVATAR");
