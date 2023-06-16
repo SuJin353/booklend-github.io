@@ -6,33 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:id="@+id/item_rl_add_book"
+        android:id="@+id/item_rl_edit_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/ic_add_book"
+        <ImageButton
+            android:id="@+id/ibt_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/ic_add_book"
+            android:background="@drawable/ic_back"
+            android:onClick="onClick"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
         <TextView
-            android:id="@+id/tv_add_book"
+            android:id="@+id/tv_edit_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_book"
+            android:text="@string/edit_book"
             android:textColor="@color/black"
             android:textSize="20sp"
             style="@style/app_name"
-            android:layout_alignTop="@id/ic_add_book"
-            android:layout_toEndOf="@id/ic_add_book"
+            android:layout_alignTop="@id/ibt_back"
+            android:layout_toEndOf="@id/ibt_back"
             android:layout_marginStart="15dp"/>
         <ImageView
             android:id="@+id/iv_book_cover"
             android:layout_width="170dp"
             android:layout_height="255dp"
-            android:layout_below="@id/tv_add_book"
+            android:layout_below="@id/tv_edit_book"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/up"
@@ -62,7 +63,6 @@
             android:id="@+id/tv_book_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignTop="@id/sp_book_genre"
             android:layout_marginStart="10dp"
             android:text="@string/genre"
@@ -159,7 +159,7 @@
             android:textSize="20sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         <Button
-            android:id="@+id/bt_add_book"
+            android:id="@+id/bt_edit_book"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_book_description"
@@ -168,27 +168,11 @@
             android:layout_marginBottom="15dp"
             android:layout_alignStart="@id/et_book_description"
             android:layout_alignEnd="@id/et_book_description"
-            android:text="@string/add_book"
+            android:text="@string/edit_book"
             android:textSize="20sp"
             android:textAllCaps="false"
             android:textColor="@color/black"
+            android:onClick="onClick"
             android:background="@drawable/button_border"/>
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottom_app_bar"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/bt_add_book"
-            app:fabCradleMargin="10dp"
-            app:fabCradleRoundedCornerRadius="50dp"
-            tools:ignore="BottomAppBar">
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_navigationView"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginEnd="19dp"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_menu"/>
-        </com.google.android.material.bottomappbar.BottomAppBar>
     </RelativeLayout>
 </ScrollView>

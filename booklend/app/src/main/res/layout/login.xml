@@ -54,8 +54,8 @@
             android:autofillHints="Alex1234!" />
         <Button
             android:id="@+id/bt_sign_in"
-            android:layout_width="93dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignEnd="@id/et_password"
             android:layout_below="@id/et_password"
             android:layout_marginTop="5dp"

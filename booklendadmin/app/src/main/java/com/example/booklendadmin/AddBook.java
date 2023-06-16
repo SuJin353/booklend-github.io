@@ -6,7 +6,9 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,8 +19,11 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,8 +41,11 @@ public class AddBook extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_add_book);
         Mapping();
+        BottomNavigation();
         Add();
     }
     @SuppressLint("NotConstructor")
@@ -60,7 +68,6 @@ public class AddBook extends AppCompatActivity {
             photoPicker.setAction(Intent.ACTION_GET_CONTENT);
             photoPicker.setType("image/*");
             activityResultLauncher.launch(photoPicker);
-            iv_book_cover.setVisibility(View.GONE);
         });
         bt_add_book.setOnClickListener(view -> {
             if (imageUri != null)
@@ -109,5 +116,22 @@ public class AddBook extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Books");
         storageReference = FirebaseStorage.getInstance().getReference();
+    }
+    @SuppressLint("NonConstantResourceId")
+    void BottomNavigation() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigationView);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_add_book);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.bottom_add_book:
+                    return true;
+                case R.id.bottom_edit_book:
+                    startActivity(new Intent(AddBook.this, EditBook.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
+            }
+            return false;
+        });
     }
 }
