@@ -1,22 +1,25 @@
 package com.example.booklend;
 
 public class User {
-    String username, fullname, email, phone_number, password, uri;
+    String uri, username, fullname, gender, year_of_birth, school, user_class, email, phone_number, password;
     int credit;
 
     public User() {
     }
 
-    public User(String uri, String username, String fullname, String email, String phone_number, String password, int credit) {
+    public User(String uri, String username, String fullname, String gender, String year_of_birth, String school, String user_class, String email, String phone_number, String password, int credit) {
+        this.uri = uri;
         this.username = username;
         this.fullname = fullname;
+        this.gender = gender;
+        this.year_of_birth = year_of_birth;
+        this.school = school;
+        this.user_class = user_class;
         this.email = email;
         this.phone_number = phone_number;
         this.password = password;
         this.credit = credit;
-        this.uri = uri;
     }
-
     public String getUsername() {
         return username;
     }
@@ -71,5 +74,36 @@ public class User {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getUser_class() {
+        return user_class;
+    }
+
+    public void setUser_class(String user_class) {
+        this.user_class = user_class;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getYear_of_birth() {
+        return year_of_birth;
+    }
+
+    public void setYear_of_birth(String year_of_birth) {
+        this.year_of_birth = year_of_birth;
     }
 }

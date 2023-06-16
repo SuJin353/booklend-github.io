@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +28,8 @@ import com.google.firebase.storage.StorageReference;
 
 public class CreateAccount extends AppCompatActivity {
     private FirebaseAuth auth;
-    private EditText et_username, et_full_name, et_email, et_phone_number, et_password, et_confirm_password;
+    private EditText et_username, et_full_name, et_email, et_phone_number, et_password, et_confirm_password, et_school, et_class, et_year_of_birth;
+    private Spinner sp_gender;
     private TextView tv_create;
     private de.hdodenhof.circleimageview.CircleImageView iv_profile_pic;
     ImageButton ibt_back;
@@ -51,10 +54,19 @@ public class CreateAccount extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         et_username = findViewById(R.id.et_username);
         et_full_name = findViewById(R.id.et_fullname);
+        et_year_of_birth = findViewById(R.id.et_year_of_birth);
+        et_school = findViewById(R.id.et_school);
+        et_class = findViewById(R.id.et_class);
         et_email = findViewById(R.id.et_email);
         et_phone_number = findViewById(R.id.et_phone_number);
         et_password = findViewById(R.id.et_password);
         et_confirm_password = findViewById(R.id.et_confirm_password);
+
+        sp_gender = findViewById(R.id.sp_gender);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender, R.layout.custom_spinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_gender.setAdapter(adapter);
+
         tv_create = findViewById(R.id.tv_create);
         iv_profile_pic = findViewById(R.id.iv_profile_pic);
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -83,14 +95,21 @@ public class CreateAccount extends AppCompatActivity {
             if (imageUri != null){
                 String username = et_username.getText().toString().trim();
                 String fullname = et_full_name.getText().toString().trim();
+                String gender = sp_gender.getSelectedItem().toString();
+                String year = et_year_of_birth.getText().toString();
+                String school = et_school.getText().toString();
+                String user_class = et_class.getText().toString();
                 String email = et_email.getText().toString().trim();
                 String phone_number = et_phone_number.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
                 String confirm_password = et_confirm_password.getText().toString().trim();
                 final StorageReference imageReference = storageReference.child("Users").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-                if (username.isEmpty() || fullname.isEmpty() || email.isEmpty() || password.isEmpty() || phone_number.isEmpty())
+                if (username.isEmpty() || fullname.isEmpty() || gender.isEmpty() || year.isEmpty() || school.isEmpty() || user_class.isEmpty() || email.isEmpty() || password.isEmpty() || phone_number.isEmpty())
                 {
                     Toast.makeText(CreateAccount.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                }
+                else if (password.length() < 6){
+                    et_password.setError("Password must be at least 6 character");
                 }
                 else if (!password.equals(confirm_password))
                 {
@@ -106,7 +125,7 @@ public class CreateAccount extends AppCompatActivity {
                                                     auth.getCurrentUser().sendEmailVerification()
                                                             .addOnSuccessListener(task1 -> {
                                                                 String uid = auth.getCurrentUser().getUid();
-                                                                User user = new User(uri.toString(), username, fullname, email, phone_number, password, 1000);
+                                                                User user = new User(uri.toString(), username, fullname, gender, year, school, user_class, email, phone_number, password, 1000);
                                                                 databaseReference.child(uid).setValue(user);
                                                                 Toast.makeText(CreateAccount.this,"Sign up successful. Check your email for verification", Toast.LENGTH_SHORT).show();
                                                                 Intent intent = new Intent(CreateAccount.this, Login.class);

@@ -121,7 +121,7 @@ public class BookInfo extends AppCompatActivity {
                 User user = snapshot.getValue(User.class);
                 UserCredit = user.getCredit();
                 if (UserCredit < price) {
-                    builder.setMessage("You don't have enough credit! Buy more?");
+                    builder.setTitle("You don't have enough credit! Buy more?");
                     builder.setCancelable(true);
                     builder.setPositiveButton("Yes", (dialogInterface, i) -> {
                         Intent intent = new Intent(BookInfo.this, BuyCredit.class);
@@ -139,14 +139,16 @@ public class BookInfo extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()){
-                                builder.setMessage("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
+                                builder.setTitle("You currently in borrowed time of this book. Press 'Continue' will reset the borrowed time and deduction your credit");
                                 builder.setCancelable(true);
                                 builder.setPositiveButton("Continue", (dialogInterface, i) -> Lend());
                                 builder.setNegativeButton("Canceled", (dialogInterface, i) -> dialogInterface.dismiss());
                                 AlertDialog alertDialog = builder.create();
                                 alertDialog.show();
                             }
-                            Lend();
+                            else{
+                                Lend();
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -182,6 +184,14 @@ public class BookInfo extends AppCompatActivity {
         String key = databaseReference.push().getKey();
         TransactionInfo transactionInfo = new TransactionInfo(key, name, price, borrowedDateAndTime);
         databaseReference.child("Transaction History").child(uid).child(key).setValue(transactionInfo);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(BookInfo.this);
+        builder.setTitle("Lend successfully");
+        builder.setMessage("Your book return date: " + returnDateAndTime);
+        builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
     void SendComment()
     {

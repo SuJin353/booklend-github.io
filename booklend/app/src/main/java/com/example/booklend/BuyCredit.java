@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +28,20 @@ public class BuyCredit extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.ibt_back: {
                 finish();
+                break;
             }
             case R.id.bt_buy: {
-                databaseReference.child("credit").setValue(1000);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(BuyCredit.this);
+                builder.setTitle("Are you sure want to buy more credit");
+                builder.setCancelable(true);
+                builder.setPositiveButton("Yes", ((dialogInterface, i) -> {
+                    databaseReference.child("credit").setValue(1000);
+                    dialogInterface.dismiss();
+                }));
+                builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                break;
             }
         }
     }

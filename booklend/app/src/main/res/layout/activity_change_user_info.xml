@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangeUserInfo">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:fillViewport="true">
+    <RelativeLayout
+        android:id="@+id/item_rl_change_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/ibt_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_back"
+            android:onClick="onClick"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+        <TextView
+            android:id="@+id/tv_change_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_info"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            style="@style/app_name"
+            android:layout_alignTop="@id/ibt_back"
+            android:layout_toEndOf="@id/ibt_back"
+            android:layout_marginStart="15dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_change_profile_pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/profile_pic"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ibt_back"
+            android:layout_marginTop="10dp"
+            android:contentDescription="profile picture"
+            android:onClick="onClick"
+            tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/et_change_username"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/iv_change_profile_pic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/User_name"
+            android:inputType="textPersonName"
+            android:autofillHints="Alex" />
+        <EditText
+            android:id="@+id/et_change_fullname"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/Full_name"
+            android:inputType="textPersonName"
+            android:autofillHints="Alex" />
+        <Spinner
+            android:id="@+id/sp_change_gender"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_fullname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown"
+            tools:ignore="SpeakableTextPresentCheck" />
+        <EditText
+            android:id="@+id/et_change_year_of_birth"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/sp_change_gender"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/Year_of_birth"
+            android:inputType="numberDecimal"
+            android:autofillHints="2000"/>
+        <EditText
+            android:id="@+id/et_change_school"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_year_of_birth"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/School"
+            android:inputType="textShortMessage"
+            android:autofillHints="UIT"/>
+        <EditText
+            android:id="@+id/et_change_class"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_school"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/Class"
+            android:inputType="textShortMessage"
+            android:autofillHints="ATTT2019"/>
+        <EditText
+            android:id="@+id/et_change_phone_number"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_class"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:autofillHints="0000000000" />
+        <TextView
+            android:id="@+id/btn_change_info"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/et_change_phone_number"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="30dp"
+            android:padding="5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border"
+            android:onClick="onClick"
+            android:text="@string/change_info"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RelativeLayout>
+</ScrollView>
