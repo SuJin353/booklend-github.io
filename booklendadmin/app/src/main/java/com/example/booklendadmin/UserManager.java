@@ -1,7 +1,6 @@
 package com.example.booklendadmin;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,53 +20,44 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class EditBook extends AppCompatActivity {
+public class UserManager extends AppCompatActivity {
     SearchView search_view;
-    GridView gv_search;
-    ArrayList<Book> bookArrayList;
-    GridViewAdapter gridViewAdapter;
+    ListView lv_search;
+    ArrayList<User> userArrayList;
+    UserAdapter userAdapter;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_edit_book);
+        setContentView(R.layout.activity_user_manager);
         Mapping();
         BottomNavigation();
-        SearchBook();
-        Click(bookArrayList);
+        SearchUser();
+        Click(userArrayList);
     }
-    void Click(ArrayList<Book> bookArrayList)
+    void Click(ArrayList<User> userArrayList)
     {
-        gv_search.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent = new Intent(EditBook.this, BookInfo.class);
-            intent.putExtra("KEY", bookArrayList.get(i).getKey());
-            intent.putExtra("IMAGE", bookArrayList.get(i).getImageUri());
-            intent.putExtra("NAME", bookArrayList.get(i).getName());
-            intent.putExtra("GENRE", bookArrayList.get(i).getGenre());
-            intent.putExtra("AUTHOR", bookArrayList.get(i).getAuthor());
-            intent.putExtra("PRICE", bookArrayList.get(i).getPrice());
-            intent.putExtra("QUANTITY", bookArrayList.get(i).getQuantity());
-            intent.putExtra("DESCRIPTION", bookArrayList.get(i).getDescription());
+        lv_search.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(UserManager.this, UserInfo.class);
+            intent.putExtra("UID", userArrayList.get(i).getUid());
             startActivity(intent);
         });
     }
-    void SearchBook(){
+    void SearchUser(){
         super.onStart();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot genres : snapshot.getChildren()){
-                        for (DataSnapshot books: genres.getChildren()){
-                            if (snapshot.exists()){
-                                Book book = books.getValue(Book.class);
-                                bookArrayList.add(book);
-                            }
-                            gridViewAdapter.notifyDataSetChanged();
-                        }
+                if (snapshot.exists())
+                {
+                    for (DataSnapshot ds : snapshot.getChildren())
+                    {
+                        User user = new User(ds.child("username").getValue(String.class), ds.getKey(), ds.child("uri").getValue(String.class));
+                        userArrayList.add(user);
                     }
+                    userAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -91,30 +82,30 @@ public class EditBook extends AppCompatActivity {
     }
     private void search(String text)
     {
-        ArrayList<Book> searchList = new ArrayList<>();
-        for (Book book : bookArrayList){
-            if ((book.getName().toLowerCase().contains(text.toLowerCase())) || (book.getAuthor().toLowerCase().contains(text.toLowerCase()))) {
-                searchList.add(book);
+        ArrayList<User> searchList = new ArrayList<>();
+        for (User user : userArrayList){
+            if ((user.getUsername().toLowerCase().contains(text.toLowerCase()))) {
+                searchList.add(user);
             }
         }
-        GridViewAdapter gridviewAdapter = new GridViewAdapter(searchList,this);
-        gv_search.setAdapter(gridviewAdapter);
+        UserAdapter adapter = new UserAdapter(searchList, this);
+        lv_search.setAdapter(adapter);
         Click(searchList);
     }
     void Mapping()
     {
         search_view = findViewById(R.id.search_view);
-        gv_search = findViewById(R.id.gv_search);
-        bookArrayList = new ArrayList<>();
-        gridViewAdapter = new GridViewAdapter(bookArrayList,this);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Books");
-        gv_search.setAdapter(gridViewAdapter);
+        lv_search = findViewById(R.id.lv_search);
+        userArrayList = new ArrayList<>();
+        userAdapter = new UserAdapter(userArrayList, UserManager.this);
+        lv_search.setAdapter(userAdapter);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
     }
     @SuppressLint("NonConstantResourceId")
     void BottomNavigation()
     {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigationView);
-        bottomNavigationView.setSelectedItemId(R.id.bottom_edit_book);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_user_management);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.bottom_add_book:
@@ -123,11 +114,11 @@ public class EditBook extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.bottom_edit_book:
+                    startActivity(new Intent(getApplicationContext(), EditBook.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    finish();
                     return true;
                 case R.id.bottom_user_management:
-                    startActivity(new Intent(getApplicationContext(), UserManager.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
                     return true;
                 case R.id.bottom_notification:
                     startActivity(new Intent(getApplicationContext(), AddNotification.class));

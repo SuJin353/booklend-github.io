@@ -130,6 +130,16 @@ public class AddBook extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
+                case R.id.bottom_user_management:
+                    startActivity(new Intent(getApplicationContext(), UserManager.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
+                case R.id.bottom_notification:
+                    startActivity(new Intent(getApplicationContext(), AddNotification.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+                    return true;
             }
             return false;
         });

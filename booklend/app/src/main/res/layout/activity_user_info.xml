@@ -46,7 +46,8 @@
             android:layout_alignStart="@id/tv_uid"
             android:layout_alignTop="@id/iv_profile_avatar"
             android:text="Username:"
-            android:textColor="@color/teal_700"/>
+            android:textColor="@color/teal_700"
+            tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/tv_profile_user"
             android:layout_width="wrap_content"
@@ -100,8 +101,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_username"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_username"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"
                 tools:ignore="RelativeOverlap" />
             <TextView
@@ -120,8 +124,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_full_name"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_full_name"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_gender"
@@ -139,8 +146,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_gender"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_gender"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_year_of_birth"
@@ -149,7 +159,7 @@
                 android:layout_below="@id/tv_gender"
                 android:layout_alignStart="@id/tv_username"
                 android:layout_marginTop="20dp"
-                android:text="@string/credit"
+                android:text="@string/Year_of_birth"
                 android:textSize="20sp"
                 android:textColor="@color/teal_700"/>
             <TextView
@@ -158,8 +168,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_year_of_birth"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_year_of_birth"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_school"
@@ -177,8 +190,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_school"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_school"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_class"
@@ -196,8 +212,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_class"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_class"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_credit"
@@ -215,8 +234,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_credit"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_credit"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_email"
@@ -234,8 +256,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_email"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_email"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_phone_number"
@@ -253,8 +278,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_phone_number"
                 android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/tv_phone_number"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 android:textSize="20sp"
+                android:textAlignment="textEnd"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/tv_password"
@@ -266,16 +294,22 @@
                 android:text="@string/Password"
                 android:textSize="20sp"
                 android:textColor="@color/teal_700"/>
+
             <TextView
                 android:id="@+id/tv_profile_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/tv_password"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@id/tv_password"
+                android:inputType="textPassword"
                 android:text=""
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                tools:ignore="SpeakableTextPresentCheck,TextViewEdits,TouchTargetSizeCheck" />
             <TextView
                 android:id="@+id/tv_change_info"
                 android:layout_width="wrap_content"

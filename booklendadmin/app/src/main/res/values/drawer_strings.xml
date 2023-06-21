@@ -4,5 +4,5 @@
     <string name="search">Search</string>
     <string name="edit_book">Edit Book</string>
     <string name="notification">Notification</string>
-    <string name="user_management">User Management</string>
+    <string name="user_management">User Manager</string>
 </resources>
