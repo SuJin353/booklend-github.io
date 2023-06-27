@@ -9,15 +9,19 @@ import android.widget.ImageView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 public class BookAdapter extends BaseAdapter {
     ArrayList<Book> bookArrayList;
+    Context context;
 
-    public BookAdapter(ArrayList<Book> bookArrayList) {
+    public BookAdapter(ArrayList<Book> bookArrayList, Context context) {
         this.bookArrayList = bookArrayList;
+        this.context = context;
     }
 
     @Override
@@ -27,7 +31,7 @@ public class BookAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return bookArrayList.get(i);
     }
 
     @Override
@@ -38,27 +42,17 @@ public class BookAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            view = LayoutInflater.from(view.getContext()).inflate(R.layout.lv_book_item, viewGroup, false);
+            view = LayoutInflater.from(context).inflate(R.layout.lv_book_item, viewGroup, false);
         }
         ImageView iv_book_cover;
-        TextView tv_book_name_info, tv_author_info, tv_id_info;
-        ImageButton ibt_check;
+        TextView tv_id_info, tv_book_name_info;
         iv_book_cover = view.findViewById(R.id.iv_book_cover);
-        tv_book_name_info = view.findViewById(R.id.tv_book_name_info);
-        tv_author_info = view.findViewById(R.id.tv_author_info);
         tv_id_info = view.findViewById(R.id.tv_id_info);
-        ibt_check = view.findViewById(R.id.ibt_check);
+        tv_book_name_info = view.findViewById(R.id.tv_book_name_info);
 
         Glide.with(view.getContext()).load(bookArrayList.get(i).getImageUri()).into(iv_book_cover);
-        tv_book_name_info.setText(bookArrayList.get(i).getName());
-        tv_author_info.setText(bookArrayList.get(i).getAuthor());
         tv_id_info.setText(bookArrayList.get(i).getKey());
-        ibt_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        tv_book_name_info.setText(bookArrayList.get(i).getName());
         return view;
     }
 }

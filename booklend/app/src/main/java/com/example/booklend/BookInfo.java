@@ -172,7 +172,7 @@ public class BookInfo extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd a 'at' HH:mm:ss");
         Calendar calendar = new GregorianCalendar();
         String borrowedDateAndTime = sdf.format(calendar.getTime());
-        calendar.add(Calendar.DATE, 7);
+        calendar.add(Calendar.DATE, 2);
         String returnDateAndTime =  sdf.format(calendar.getTime());
 
         databaseReference.child("Books").child(genre).child(key).child("quantity").setValue(quantity - 1);
