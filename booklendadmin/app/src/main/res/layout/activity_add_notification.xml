@@ -1,9 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNotification">
+    <ImageView
+        android:id="@+id/ic_add_notifications"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_add_notifications"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+    <TextView
+        android:id="@+id/tv_add_notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add notifications"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        style="@style/app_name"
+        android:layout_alignTop="@id/ic_add_notifications"
+        android:layout_toEndOf="@id/ic_add_notifications"
+        android:layout_marginStart="15dp"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:layout_below="@id/tv_add_notifications"
+        android:layout_alignStart="@id/ic_add_notifications"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_alignStart="@id/tv_title"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/border_2"
+        android:hint="Title"
+        android:padding="5dp"
+        tools:ignore="TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:layout_below="@id/et_title"
+        android:layout_alignStart="@id/tv_title"
+        android:layout_marginTop="5dp"
+        />
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_message"
+        android:layout_alignStart="@id/tv_title"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/border_2"
+        android:lines="20"
+        android:padding="5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+    <Button
+        android:id="@+id/bt_add_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_above="@id/bottom_app_bar"
+        android:layout_marginBottom="15dp"
+        android:layout_alignStart="@id/et_title"
+        android:layout_alignEnd="@id/et_title"
+        android:text="Add notification"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:onClick="onClick"
+        android:background="@drawable/button_border"/>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_app_bar"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="50dp"
+        tools:ignore="BottomAppBar">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginEnd="15dp"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_menu"/>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+</RelativeLayout>
