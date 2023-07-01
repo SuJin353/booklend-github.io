@@ -19,6 +19,17 @@
             android:backgroundTint="@color/teal_700"
             android:onClick="onClick"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+        <TextView
+            android:id="@+id/tv_book_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/ibt_back"
+            android:layout_alignTop="@id/ibt_back"
+            android:text="Book Info"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            style="@style/app_name"
+            android:layout_marginStart="15dp"/>
         <ImageButton
             android:id="@+id/bt_lend"
             android:layout_width="wrap_content"

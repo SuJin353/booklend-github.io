@@ -1,74 +1,29 @@
 package com.example.booklend;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Window;
+public class Notification {
+    String title, message;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-
-public class Notification extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_notification);
-        BottomNavigation();
+    public Notification(String title, String message) {
+        this.title = title;
+        this.message = message;
     }
-    @SuppressLint("NonConstantResourceId")
-    void BottomNavigation()
-    {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigationView);
-        bottomNavigationView.setSelectedItemId(R.id.bottom_notification);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.bottom_home:
-                    startActivity(new Intent(getApplicationContext(),Home.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                    return true;
-                case R.id.bottom_serach:
-                    startActivity(new Intent(getApplicationContext(), Search.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                    return true;
-                case R.id.bottom_user:
-                    startActivity(new Intent(getApplicationContext(), User_Home.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    finish();
-                    return true;
-                case R.id.bottom_notification:
-                    return true;
-                case R.id.bottom_logout:
-                    promptLogoutConfirmation();
-                    return true;
-            }
-            return false;
-        });
+
+    public Notification() {
     }
-    private void promptLogoutConfirmation() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
-        builder.setMessage("Are you sure you want to logout ?");
-        builder.setCancelable(true);
 
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(getApplicationContext(),Login.class));
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            dialogInterface.dismiss();
-            finish();
-        });
+    public String getTitle() {
+        return title;
+    }
 
-        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getMessage() {
+        return message;
+    }
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

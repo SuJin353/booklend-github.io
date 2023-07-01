@@ -7,24 +7,31 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context=".User_Home">
+    <ImageView
+        android:id="@+id/ic_user"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_user"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
     <TextView
-        android:id="@+id/tv_app_name"
+        android:id="@+id/tv_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
+        android:text="@string/user"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
         style="@style/app_name"
-        tools:ignore="TextSizeCheck" />
-
+        android:layout_alignTop="@id/ic_user"
+        android:layout_toEndOf="@id/ic_user"
+        android:layout_marginStart="15dp"/>
     <ImageView
         android:id="@+id/iv_personal_info"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@id/tv_app_name"
-        android:layout_alignStart="@id/tv_app_name"
+        android:layout_below="@id/tv_user"
+        android:layout_alignStart="@id/ic_user"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_circle_user"
         android:backgroundTint="@color/teal_200"
@@ -58,7 +65,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/iv_personal_info"
-        android:layout_alignStart="@id/tv_app_name"
+        android:layout_alignStart="@id/iv_personal_info"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_circle_book"
         android:backgroundTint="@color/teal_700"
@@ -92,7 +99,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/iv_borrowed_book"
-        android:layout_alignStart="@id/tv_app_name"
+        android:layout_alignStart="@id/iv_personal_info"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_overdue_book"
         android:backgroundTint="@color/red"
@@ -126,7 +133,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/iv_overdue_book"
-        android:layout_alignStart="@id/tv_app_name"
+        android:layout_alignStart="@id/iv_personal_info"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_circle_transaction_history"
         tools:ignore="ContentDescription,ImageContrastCheck" />
@@ -158,7 +165,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/iv_transaction_history"
-        android:layout_alignStart="@id/tv_app_name"
+        android:layout_alignStart="@id/iv_personal_info"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_circle_buy_credit_24"
         android:backgroundTint="@color/orange"
@@ -199,7 +206,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:layout_marginEnd="19dp"
+            android:layout_marginEnd="15dp"
             app:menu="@menu/bottom_menu"
             tools:ignore="VisualLintBottomNav" />
     </com.google.android.material.bottomappbar.BottomAppBar>

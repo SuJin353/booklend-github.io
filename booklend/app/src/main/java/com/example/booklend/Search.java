@@ -132,7 +132,7 @@ public class Search extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.bottom_notification:
-                    startActivity(new Intent(getApplicationContext(),Notification.class));
+                    startActivity(new Intent(getApplicationContext(), Notifications.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     finish();
                     return true;
